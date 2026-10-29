@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 48" width="850" height="48">
+  <defs>
+    <filter id="subtitle-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.2" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <style>
+    @keyframes lineCycle1 {
+      0% { opacity: 0; transform: translateY(4px); }
+      3% { opacity: 1; transform: translateY(0); }
+      22% { opacity: 1; transform: translateY(0); }
+      24% { opacity: 0; transform: translateY(-4px); }
+      25%, 100% { opacity: 0; }
+    }
+    @keyframes lineCycle2 {
+      0%, 24.9% { opacity: 0; transform: translateY(4px); }
+      25% { opacity: 0; transform: translateY(4px); }
+      28% { opacity: 1; transform: translateY(0); }
+      47% { opacity: 1; transform: translateY(0); }
+      49% { opacity: 0; transform: translateY(-4px); }
+      50%, 100% { opacity: 0; }
+    }
+    @keyframes lineCycle3 {
+      0%, 49.9% { opacity: 0; transform: translateY(4px); }
+      50% { opacity: 0; transform: translateY(4px); }
+      53% { opacity: 1; transform: translateY(0); }
+      72% { opacity: 1; transform: translateY(0); }
+      74% { opacity: 0; transform: translateY(-4px); }
+      75%, 100% { opacity: 0; }
+    }
+    @keyframes lineCycle4 {
+      0%, 74.9% { opacity: 0; transform: translateY(4px); }
+      75% { opacity: 0; transform: translateY(4px); }
+      78% { opacity: 1; transform: translateY(0); }
+      97% { opacity: 1; transform: translateY(0); }
+      99% { opacity: 0; transform: translateY(-4px); }
+      100% { opacity: 0; }
+    }
+    @keyframes blinkCursor {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    .sub-text {
+      font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, Monaco, monospace;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+
+    .l1 { animation: lineCycle1 16s infinite ease-in-out; }
+    .l2 { animation: lineCycle2 16s infinite ease-in-out; }
+    .l3 { animation: lineCycle3 16s infinite ease-in-out; }
+    .l4 { animation: lineCycle4 16s infinite ease-in-out; }
+
+    .cursor {
+      animation: blinkCursor 0.75s infinite;
+      fill: #10b981;
+      font-weight: 800;
+    }
+  </style>
+
+  <g filter="url(#subtitle-glow)">
+    <!-- Line 1: Deepak Bathirachalam -->
+    <g class="l1">
+      <text x="425" y="24" class="sub-text" fill="#ecfdf5">
+        <tspan fill="#34d399">&gt; </tspan>Deepak Bathirachalam<tspan class="cursor" fill="#10b981"> ▋</tspan>
+      </text>
+    </g>
+
+    <!-- Line 2: 1st Place Winner • API Heist TechnoVIT -->
+    <g class="l2">
+      <text x="425" y="24" class="sub-text" fill="#fbbf24">
+        <tspan fill="#34d399">&gt; </tspan>1st Place Winner <tspan fill="#10b981">•</tspan> API Heist TechnoVIT<tspan class="cursor" fill="#10b981"> ▋</tspan>
+      </text>
+    </g>
+
+    <!-- Line 3: B.Tech IT • Competitive Coder & Systems Dev -->
+    <g class="l3">
+      <text x="425" y="24" class="sub-text" fill="#38bdf8">
+        <tspan fill="#34d399">&gt; </tspan>B.Tech IT <tspan fill="#10b981">•</tspan> Competitive Coder &amp; Systems Dev<tspan class="cursor" fill="#10b981"> ▋</tspan>
+      </text>
+    </g>
+
+    <!-- Line 4: Open to Software Engineering Internships! -->
+    <g class="l4">
+      <text x="425" y="24" class="sub-text" fill="#34d399">
+        <tspan fill="#34d399">&gt; </tspan>Open to Software Engineering Internships!<tspan class="cursor" fill="#10b981"> ▋</tspan>
+      </text>
+    </g>
+  </g>
+</svg>
