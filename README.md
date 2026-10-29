@@ -1,6 +1,6 @@
 <div align="center">
 
-  <!-- Retro CRT Animated Terminal Window with GitHub Theme Support -->
+  <!-- Classic High-Contrast Animated Terminal Window with GitHub Theme Support -->
   <a href="https://github.com/japanchicken898-droid">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="assets/terminal.svg">

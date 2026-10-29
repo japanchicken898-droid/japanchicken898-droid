@@ -1,45 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 48" width="850" height="48">
-  <defs>
-    <filter id="subtitle-glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="1.2" result="blur" />
-      <feMerge>
-        <feMergeNode in="blur" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
-    </filter>
-  </defs>
-
   <style>
   /* <![CDATA[ */
     @keyframes lineCycle1 {
-      0% { opacity: 0; transform: translateY(4px); }
+      0% { opacity: 0; transform: translateY(3px); }
       3% { opacity: 1; transform: translateY(0); }
       22% { opacity: 1; transform: translateY(0); }
-      24% { opacity: 0; transform: translateY(-4px); }
+      24% { opacity: 0; transform: translateY(-3px); }
       25%, 100% { opacity: 0; }
     }
     @keyframes lineCycle2 {
-      0%, 24.9% { opacity: 0; transform: translateY(4px); }
-      25% { opacity: 0; transform: translateY(4px); }
+      0%, 24.9% { opacity: 0; transform: translateY(3px); }
+      25% { opacity: 0; transform: translateY(3px); }
       28% { opacity: 1; transform: translateY(0); }
       47% { opacity: 1; transform: translateY(0); }
-      49% { opacity: 0; transform: translateY(-4px); }
+      49% { opacity: 0; transform: translateY(-3px); }
       50%, 100% { opacity: 0; }
     }
     @keyframes lineCycle3 {
-      0%, 49.9% { opacity: 0; transform: translateY(4px); }
-      50% { opacity: 0; transform: translateY(4px); }
+      0%, 49.9% { opacity: 0; transform: translateY(3px); }
+      50% { opacity: 0; transform: translateY(3px); }
       53% { opacity: 1; transform: translateY(0); }
       72% { opacity: 1; transform: translateY(0); }
-      74% { opacity: 0; transform: translateY(-4px); }
+      74% { opacity: 0; transform: translateY(-3px); }
       75%, 100% { opacity: 0; }
     }
     @keyframes lineCycle4 {
-      0%, 74.9% { opacity: 0; transform: translateY(4px); }
-      75% { opacity: 0; transform: translateY(4px); }
+      0%, 74.9% { opacity: 0; transform: translateY(3px); }
+      75% { opacity: 0; transform: translateY(3px); }
       78% { opacity: 1; transform: translateY(0); }
       97% { opacity: 1; transform: translateY(0); }
-      99% { opacity: 0; transform: translateY(-4px); }
+      99% { opacity: 0; transform: translateY(-3px); }
       100% { opacity: 0; }
     }
     @keyframes blinkCursor {
@@ -48,7 +38,7 @@
     }
 
     .sub-text {
-      font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, Monaco, monospace;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
       font-size: 15.5px;
       font-weight: 600;
       letter-spacing: 0.5px;
@@ -63,38 +53,38 @@
 
     .cursor {
       animation: blinkCursor 0.75s infinite;
-      fill: #10b981;
+      fill: #58a6ff;
       font-weight: 800;
     }
   /* ]]> */
   </style>
 
-  <g filter="url(#subtitle-glow)">
+  <g>
     <!-- Line 1: Deepak Bathirachalam -->
     <g class="l1">
-      <text x="425" y="24" class="sub-text" fill="#ecfdf5">
-        <tspan fill="#34d399">&gt; </tspan>Deepak Bathirachalam<tspan class="cursor" fill="#10b981"> ▋</tspan>
+      <text x="425" y="24" class="sub-text" fill="#f0f6fc">
+        <tspan fill="#58a6ff">&gt; </tspan>Deepak Bathirachalam<tspan class="cursor" fill="#58a6ff"> ▋</tspan>
       </text>
     </g>
 
     <!-- Line 2: 1st Place Winner • API Heist TechnoVIT -->
     <g class="l2">
-      <text x="425" y="24" class="sub-text" fill="#fbbf24">
-        <tspan fill="#34d399">&gt; </tspan>1st Place Winner <tspan fill="#10b981">•</tspan> API Heist TechnoVIT<tspan class="cursor" fill="#10b981"> ▋</tspan>
+      <text x="425" y="24" class="sub-text" fill="#ffa657">
+        <tspan fill="#58a6ff">&gt; </tspan>1st Place Winner <tspan fill="#8b949e">•</tspan> API Heist TechnoVIT<tspan class="cursor" fill="#58a6ff"> ▋</tspan>
       </text>
     </g>
 
     <!-- Line 3: B.Tech IT '29 • Ocular & Systems Dev -->
     <g class="l3">
-      <text x="425" y="24" class="sub-text" fill="#38bdf8">
-        <tspan fill="#34d399">&gt; </tspan>B.Tech IT '29 <tspan fill="#10b981">•</tspan> Systems Dev &amp; Edge AI<tspan class="cursor" fill="#10b981"> ▋</tspan>
+      <text x="425" y="24" class="sub-text" fill="#58a6ff">
+        <tspan fill="#58a6ff">&gt; </tspan>B.Tech IT '29 <tspan fill="#8b949e">•</tspan> Systems Dev &amp; Edge AI<tspan class="cursor" fill="#58a6ff"> ▋</tspan>
       </text>
     </g>
 
     <!-- Line 4: Open to Software Engineering Internships! -->
     <g class="l4">
-      <text x="425" y="24" class="sub-text" fill="#34d399">
-        <tspan fill="#34d399">&gt; </tspan>Open to Software Engineering Internships!<tspan class="cursor" fill="#10b981"> ▋</tspan>
+      <text x="425" y="24" class="sub-text" fill="#3fb950">
+        <tspan fill="#58a6ff">&gt; </tspan>Open to Software Engineering Internships! 🚀<tspan class="cursor" fill="#58a6ff"> ▋</tspan>
       </text>
     </g>
   </g>

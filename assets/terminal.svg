@@ -1,736 +1,520 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 515" width="850" height="515">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 440" width="850" height="440">
   <defs>
-    <!-- CRT scanline pattern -->
-    <pattern id="scanlines" width="100%" height="4" patternUnits="userSpaceOnUse">
-      <line x1="0" y1="0" x2="850" y2="0" stroke="#000000" stroke-width="1.2" opacity="0.28" />
-    </pattern>
-
-    <!-- CRT monitor vignette / curvature gradient -->
-    <radialGradient id="crt-vignette" cx="50%" cy="50%" r="75%">
-      <stop offset="60%" stop-color="#10b981" stop-opacity="0.0" />
-      <stop offset="90%" stop-color="#04080c" stop-opacity="0.35" />
-      <stop offset="100%" stop-color="#020305" stop-opacity="0.8" />
-    </radialGradient>
-
-    <!-- Glowing phosphor filter -->
-    <filter id="phosphor-glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="1.2" result="blur" />
-      <feMerge>
-        <feMergeNode in="blur" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
-    </filter>
-
     <!-- Window drop shadow -->
     <filter id="window-shadow" x="-5%" y="-5%" width="110%" height="115%">
-      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000000" flood-opacity="0.75" />
-      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#10b981" flood-opacity="0.15" />
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#010409" flood-opacity="0.8" />
     </filter>
 
-    <!-- Screen interior clip -->
+    <!-- Fixed 360px screen container clip -->
     <clipPath id="terminal-screen-clip">
-      <rect x="15" y="55" width="820" height="445" />
+      <rect x="15" y="55" width="820" height="370" />
     </clipPath>
 
-    <!-- Circular avatar clip -->
+    <!-- Circular avatar clip (r=46 at 95, 175) -->
     <clipPath id="avatar-clip">
-      <circle cx="135" cy="225" r="50" />
+      <circle cx="95" cy="175" r="46" />
     </clipPath>
-
-    <!-- Workstation ambient glow gradient -->
-    <linearGradient id="term-ambient-glow" x1="0%" y1="100%" x2="0%" y2="0%">
-      <stop offset="0%" stop-color="#10b981" stop-opacity="0.5" />
-      <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.2" />
-      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.0" />
-    </linearGradient>
-
-    <linearGradient id="laser-beam-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
-      <stop offset="0%" stop-color="#10b981" stop-opacity="0.85" />
-      <stop offset="100%" stop-color="#10b981" stop-opacity="0.0" />
-    </linearGradient>
-
-    <radialGradient id="avatar-bg" cx="50%" cy="40%" r="65%">
-      <stop offset="0%" stop-color="#111c2e" />
-      <stop offset="70%" stop-color="#070c14" />
-      <stop offset="100%" stop-color="#03060a" />
-    </radialGradient>
   </defs>
 
   <style>
   /* <![CDATA[ */
     /* ================= MASTER 28s TIMELINE (7s per screen) ================= */
     /* Screen 1 (0s - 7s | 0% - 25%) */
-    @keyframes s1_cmd {
-      0% { opacity: 0; }
-      1% { opacity: 1; }
-      22% { opacity: 1; }
-      24% { opacity: 0; }
-      25%, 100% { opacity: 0; }
-    }
-    @keyframes s1_body {
-      0%, 1.2% { opacity: 0; transform: translateY(6px); }
-      3% { opacity: 1; transform: translateY(0); }
-      22% { opacity: 1; transform: translateY(0); }
-      24% { opacity: 0; transform: translateY(-4px); }
-      25%, 100% { opacity: 0; }
+    @keyframes s1_cycle {
+      0% { opacity: 0; visibility: visible; }
+      1.5% { opacity: 1; visibility: visible; }
+      23% { opacity: 1; visibility: visible; }
+      24.8% { opacity: 0; visibility: visible; }
+      25%, 100% { opacity: 0; visibility: hidden; }
     }
 
     /* Screen 2: Featured Systems (7s - 14s | 25% - 50%) */
-    @keyframes s2_cmd {
-      0%, 24.9% { opacity: 0; }
-      25.8% { opacity: 1; }
-      47% { opacity: 1; }
-      49% { opacity: 0; }
-      50%, 100% { opacity: 0; }
-    }
-    @keyframes s2_p1 {
-      0%, 26.5% { opacity: 0; transform: translateY(6px); }
-      28% { opacity: 1; transform: translateY(0); }
-      47% { opacity: 1; transform: translateY(0); }
-      49% { opacity: 0; transform: translateY(-4px); }
-      50%, 100% { opacity: 0; }
-    }
-    @keyframes s2_p2 {
-      0%, 28% { opacity: 0; transform: translateY(6px); }
-      29.5% { opacity: 1; transform: translateY(0); }
-      47% { opacity: 1; transform: translateY(0); }
-      49% { opacity: 0; transform: translateY(-4px); }
-      50%, 100% { opacity: 0; }
-    }
-    @keyframes s2_p3 {
-      0%, 29.5% { opacity: 0; transform: translateY(6px); }
-      31% { opacity: 1; transform: translateY(0); }
-      47% { opacity: 1; transform: translateY(0); }
-      49% { opacity: 0; transform: translateY(-4px); }
-      50%, 100% { opacity: 0; }
-    }
-    @keyframes s2_p4 {
-      0%, 31% { opacity: 0; transform: translateY(6px); }
-      32.5% { opacity: 1; transform: translateY(0); }
-      47% { opacity: 1; transform: translateY(0); }
-      49% { opacity: 0; transform: translateY(-4px); }
-      50%, 100% { opacity: 0; }
+    @keyframes s2_cycle {
+      0%, 24.9% { opacity: 0; visibility: hidden; }
+      25% { opacity: 0; visibility: visible; }
+      26.5% { opacity: 1; visibility: visible; }
+      48% { opacity: 1; visibility: visible; }
+      49.8% { opacity: 0; visibility: visible; }
+      50%, 100% { opacity: 0; visibility: hidden; }
     }
 
-    /* Screen 3: Achievements & Track Record (14s - 21s | 50% - 75%) */
-    @keyframes s3_cmd {
-      0%, 49.9% { opacity: 0; }
-      50.8% { opacity: 1; }
-      72% { opacity: 1; }
-      74% { opacity: 0; }
-      75%, 100% { opacity: 0; }
-    }
-    @keyframes s3_a1 {
-      0%, 52% { opacity: 0; transform: translateY(6px); }
-      53.5% { opacity: 1; transform: translateY(0); }
-      72% { opacity: 1; transform: translateY(0); }
-      74% { opacity: 0; transform: translateY(-4px); }
-      75%, 100% { opacity: 0; }
-    }
-    @keyframes s3_a2 {
-      0%, 53.5% { opacity: 0; transform: translateY(6px); }
-      55% { opacity: 1; transform: translateY(0); }
-      72% { opacity: 1; transform: translateY(0); }
-      74% { opacity: 0; transform: translateY(-4px); }
-      75%, 100% { opacity: 0; }
-    }
-    @keyframes s3_a3 {
-      0%, 55% { opacity: 0; transform: translateY(6px); }
-      56.5% { opacity: 1; transform: translateY(0); }
-      72% { opacity: 1; transform: translateY(0); }
-      74% { opacity: 0; transform: translateY(-4px); }
-      75%, 100% { opacity: 0; }
+    /* Screen 3: Achievements (14s - 21s | 50% - 75%) */
+    @keyframes s3_cycle {
+      0%, 49.9% { opacity: 0; visibility: hidden; }
+      50% { opacity: 0; visibility: visible; }
+      51.5% { opacity: 1; visibility: visible; }
+      73% { opacity: 1; visibility: visible; }
+      74.8% { opacity: 0; visibility: visible; }
+      75%, 100% { opacity: 0; visibility: hidden; }
     }
 
-    /* Screen 4: Network & Prompt (21s - 28s | 75% - 100%) */
-    @keyframes s4_cmd {
-      0%, 74.9% { opacity: 0; }
-      75.8% { opacity: 1; }
-      97% { opacity: 1; }
-      99% { opacity: 0; }
-      100% { opacity: 0; }
-    }
-    @keyframes s4_row1 {
-      0%, 76.5% { opacity: 0; transform: translateY(6px); }
-      78% { opacity: 1; transform: translateY(0); }
-      97% { opacity: 1; transform: translateY(0); }
-      99% { opacity: 0; transform: translateY(-4px); }
-      100% { opacity: 0; }
-    }
-    @keyframes s4_row2 {
-      0%, 78% { opacity: 0; transform: translateY(6px); }
-      79.5% { opacity: 1; transform: translateY(0); }
-      97% { opacity: 1; transform: translateY(0); }
-      99% { opacity: 0; transform: translateY(-4px); }
-      100% { opacity: 0; }
-    }
-    @keyframes s4_row3 {
-      0%, 79.5% { opacity: 0; transform: translateY(6px); }
-      81% { opacity: 1; transform: translateY(0); }
-      97% { opacity: 1; transform: translateY(0); }
-      99% { opacity: 0; transform: translateY(-4px); }
-      100% { opacity: 0; }
-    }
-    @keyframes s4_prompt {
-      0%, 81.5% { opacity: 0; transform: translateY(6px); }
-      83% { opacity: 1; transform: translateY(0); }
-      97% { opacity: 1; transform: translateY(0); }
-      99% { opacity: 0; transform: translateY(-4px); }
-      100% { opacity: 0; }
+    /* Screen 4: Network & Contact (21s - 28s | 75% - 100%) */
+    @keyframes s4_cycle {
+      0%, 74.9% { opacity: 0; visibility: hidden; }
+      75% { opacity: 0; visibility: visible; }
+      76.5% { opacity: 1; visibility: visible; }
+      98% { opacity: 1; visibility: visible; }
+      99.8% { opacity: 0; visibility: visible; }
+      100% { opacity: 0; visibility: hidden; }
     }
 
-    /* Avatar specific animations */
-    @keyframes avatarBreathe {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-1.5px); }
-    }
-    @keyframes eyeBlink {
-      0%, 94%, 100% { transform: scaleY(1); }
-      96%, 98% { transform: scaleY(0.12); }
-    }
-    @keyframes hudRotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    @keyframes matrixReflection {
-      0%, 100% { opacity: 0.65; transform: translateX(0); }
-      48% { opacity: 0.65; }
-      50% { opacity: 0.95; transform: translateX(1px); }
-      52% { opacity: 0.55; transform: translateX(-1px); }
-      75% { opacity: 0.8; }
-    }
     @keyframes cursorBlink {
       0%, 49% { opacity: 1; }
       50%, 100% { opacity: 0; }
     }
-    @keyframes crtPulse {
-      0%, 100% { opacity: 0.985; }
-      50% { opacity: 1; }
-      85% { opacity: 0.97; }
+
+    @keyframes avatarBreathe {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-1.5px); }
+    }
+
+    @keyframes eyeBlink {
+      0%, 94%, 100% { transform: scaleY(1); }
+      96%, 98% { transform: scaleY(0.12); }
     }
 
     .term-text {
-      font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, Menlo, Monaco, monospace;
-      fill: #10b981;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
     }
 
-    /* Class bindings for master 28s timeline */
-    .s1-c { animation: s1_cmd 28s infinite; }
-    .s1-b { animation: s1_body 28s infinite; }
-
-    .s2-c { animation: s2_cmd 28s infinite; }
-    .s2-1 { animation: s2_p1 28s infinite; }
-    .s2-2 { animation: s2_p2 28s infinite; }
-    .s2-3 { animation: s2_p3 28s infinite; }
-    .s2-4 { animation: s2_p4 28s infinite; }
-
-    .s3-c { animation: s3_cmd 28s infinite; }
-    .s3-1 { animation: s3_a1 28s infinite; }
-    .s3-2 { animation: s3_a2 28s infinite; }
-    .s3-3 { animation: s3_a3 28s infinite; }
-
-    .s4-c { animation: s4_cmd 28s infinite; }
-    .s4-1 { animation: s4_row1 28s infinite; }
-    .s4-2 { animation: s4_row2 28s infinite; }
-    .s4-3 { animation: s4_row3 28s infinite; }
-    .s4-p { animation: s4_prompt 28s infinite; }
+    .screen-1 { animation: s1_cycle 28s infinite; }
+    .screen-2 { animation: s2_cycle 28s infinite; }
+    .screen-3 { animation: s3_cycle 28s infinite; }
+    .screen-4 { animation: s4_cycle 28s infinite; }
 
     .avatar-shoulders { animation: avatarBreathe 4s infinite ease-in-out; }
     .avatar-eyes-group {
       animation: eyeBlink 3.8s infinite;
-      transform-origin: 135px 222px;
+      transform-origin: 95px 172px;
     }
-    .hud-spinner {
-      animation: hudRotate 16s linear infinite;
-      transform-origin: 135px 225px;
+
+    .blinking-cursor {
+      animation: cursorBlink 0.8s infinite;
+      fill: #58a6ff;
     }
-    .lens-glint { animation: matrixReflection 3.2s infinite ease-in-out; }
 
-    .crt-flicker { animation: crtPulse 0.2s infinite; }
-    .blinking-cursor { animation: cursorBlink 0.75s infinite; fill: #10b981; font-weight: 800; }
-
-    .t-prompt { fill: #34d399; font-weight: 700; }
-    .t-user { fill: #38bdf8; font-weight: 600; }
-    .t-cmd { fill: #a7f3d0; font-weight: 600; text-shadow: 0 0 5px rgba(52, 211, 153, 0.7); }
-    .t-title { fill: #6ee7b7; font-weight: 700; }
-    .t-dim { fill: #059669; }
-    .t-sub { fill: #64748b; }
-    .t-bright { fill: #ecfdf5; font-weight: 600; }
-    .t-gold { fill: #fbbf24; font-weight: 700; text-shadow: 0 0 5px rgba(251, 191, 36, 0.5); }
-    .t-cyan { fill: #38bdf8; font-weight: 600; }
-    /* ]]> */
+    /* GitHub Native Dark Theme High-Contrast Hierarchy */
+    .c-bg { fill: #0d1117; }
+    .c-card { fill: #161b22; stroke: #30363d; stroke-width: 1px; }
+    .c-border { stroke: #30363d; }
+    .c-body { fill: #f0f6fc; }
+    .c-prompt-arr { fill: #3fb950; font-weight: 700; }
+    .c-prompt-dir { fill: #58a6ff; font-weight: 600; }
+    .c-prompt-cmd { fill: #f0f6fc; font-weight: 600; }
+    .c-title { fill: #ffa657; font-weight: 600; }
+    .c-cyan { fill: #58a6ff; font-weight: 600; }
+    .c-green { fill: #3fb950; font-weight: 600; }
+    .c-muted { fill: #8b949e; }
+    .c-tag { fill: #58a6ff; font-size: 10.5px; font-weight: 500; }
+  /* ]]> */
   </style>
 
-  <!-- Window Container -->
+  <!-- Terminal Window Outer Container -->
   <g filter="url(#window-shadow)">
-    <!-- Terminal Outer Frame -->
-    <rect x="15" y="15" width="820" height="485" rx="12" fill="#0b0f14" stroke="#1e293b" stroke-width="1.5" />
+    <!-- Matte Dark Window Frame -->
+    <rect x="15" y="15" width="820" height="410" rx="10" fill="#0d1117" stroke="#30363d" stroke-width="1.2" />
     
     <!-- Titlebar Header -->
-    <path d="M 15 27 A 12 12 0 0 1 27 15 L 823 15 A 12 12 0 0 1 835 27 L 835 55 L 15 55 Z" fill="#0f172a" />
-    <line x1="15" y1="55" x2="835" y2="55" stroke="#1e293b" stroke-width="1" />
+    <path d="M 15 25 A 10 10 0 0 1 25 15 L 825 15 A 10 10 0 0 1 835 25 L 835 52 L 15 52 Z" fill="#161b22" />
+    <line x1="15" y1="52" x2="835" y2="52" stroke="#30363d" stroke-width="1" />
 
-    <!-- Window Controls -->
-    <circle cx="42" cy="35" r="6" fill="#ef4444" />
-    <circle cx="62" cy="35" r="6" fill="#f59e0b" />
-    <circle cx="82" cy="35" r="6" fill="#10b981" />
+    <!-- macOS Window Controls -->
+    <circle cx="38" cy="33" r="6" fill="#ff5f56" />
+    <circle cx="58" cy="33" r="6" fill="#ffbd2e" />
+    <circle cx="78" cy="33" r="6" fill="#27c93f" />
 
-    <!-- Terminal Title -->
-    <text x="425" y="39" text-anchor="middle" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', monospace" font-size="12" fill="#64748b" font-weight="500">
-      japanchicken898-droid@matrix-term: ~ (zsh) — 80x24
+    <!-- Terminal Window Title -->
+    <text x="425" y="38" text-anchor="middle" font-family="'JetBrains Mono', 'SF Mono', Consolas, monospace" font-size="12" fill="#8b949e" font-weight="500">
+      japanchicken898-droid@terminal: ~ (zsh) — 80x24
     </text>
 
-    <!-- Branch / Status Badge in Titlebar -->
-    <rect x="735" y="26" width="85" height="18" rx="4" fill="#111c2a" stroke="#1e293b" stroke-width="1" />
-    <text x="777" y="39" text-anchor="middle" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10" fill="#10b981" font-weight="600">● CRT 60Hz</text>
+    <!-- Branch / Environment Pill in Titlebar -->
+    <rect x="730" y="24" width="90" height="18" rx="4" fill="#21262d" stroke="#30363d" stroke-width="1" />
+    <text x="775" y="37" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10.5" fill="#8b949e" font-weight="500">
+      <tspan fill="#3fb950">● </tspan>main (zsh)
+    </text>
   </g>
 
-  <!-- Screen Content Area (Clipped to Window Interior) -->
-  <g clip-path="url(#terminal-screen-clip)" class="crt-flicker">
+  <!-- Screen Content Area (Fixed 360px Container clipped at y=55, h=370) -->
+  <g clip-path="url(#terminal-screen-clip)" class="term-text">
 
-    <!-- ==================== SCREEN 1: SYSTEM INFO / NEOFETCH WITH ANIMATED AVATAR ==================== -->
-    <g class="term-text" filter="url(#phosphor-glow)">
-      <!-- Command prompt -->
-      <g class="s1-c">
-        <text x="40" y="88" font-size="13">
-          <tspan class="t-prompt">➜ </tspan>
-          <tspan class="t-user">japanchicken898-droid</tspan><tspan class="t-dim">@</tspan><tspan class="t-cyan">matrix-core</tspan>
-          <tspan class="t-dim">:</tspan><tspan class="t-prompt">~</tspan><tspan class="t-dim">$</tspan>
-          <tspan class="t-cmd"> neofetch --profile --with-avatar</tspan>
-        </text>
-      </g>
+    <!-- ==================== SCREEN 1: NEOFETCH & SYSTEM TELEMETRY ==================== -->
+    <g class="screen-1" transform="translate(40, 75)">
+      <!-- Command Prompt -->
+      <text x="0" y="16" font-size="13">
+        <tspan class="c-prompt-arr">➜ </tspan>
+        <tspan class="c-prompt-dir">~ </tspan>
+        <tspan class="c-prompt-cmd">neofetch --profile</tspan>
+      </text>
 
-      <g class="s1-b">
-        <!-- ================= PURE VECTOR CYBER-AVATAR BADGE (~100px) ================= -->
-        <g transform="translate(0, 0)">
-          <!-- Outer Sci-Fi HUD Bracket Marks -->
-          <path d="M 76 174 L 76 166 L 84 166" fill="none" stroke="#10b981" stroke-width="1.2" opacity="0.6" />
-          <path d="M 194 174 L 194 166 L 186 166" fill="none" stroke="#10b981" stroke-width="1.2" opacity="0.6" />
-          <path d="M 76 276 L 76 284 L 84 284" fill="none" stroke="#10b981" stroke-width="1.2" opacity="0.6" />
-          <path d="M 194 276 L 194 284 L 186 284" fill="none" stroke="#10b981" stroke-width="1.2" opacity="0.6" />
+      <!-- ================= PURE VECTOR DEVELOPER AVATAR ================= -->
+      <g transform="translate(0, 0)">
+        <!-- Outer border ring -->
+        <circle cx="95" cy="165" r="48" fill="none" stroke="#30363d" stroke-width="1.5" />
+        <circle cx="95" cy="165" r="46" fill="#161b22" />
 
-          <!-- Rotating Cyan Dash Outer HUD Ring -->
-          <circle cx="135" cy="225" r="55" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-dasharray="7 5" opacity="0.75" class="hud-spinner" />
+        <!-- Avatar Clipped Area (r=46 at 95, 165) -->
+        <g clip-path="url(#avatar-clip)">
+          <!-- Workstation Ambient Background -->
+          <rect x="45" y="115" width="100" height="100" fill="#0d1117" />
+          
+          <!-- Subtle Terminal Code Stream -->
+          <text x="56" y="134" font-size="6.5" fill="#30363d" font-family="monospace">010110</text>
+          <text x="56" y="143" font-size="6.5" fill="#30363d" font-family="monospace">DEVBOX</text>
+          <text x="118" y="134" font-size="6.5" fill="#30363d" font-family="monospace">SYS_OK</text>
+          <text x="118" y="143" font-size="6.5" fill="#30363d" font-family="monospace">ARM64</text>
 
-          <!-- Subtle Pulsing Green Neon Border (#10b981) -->
-          <circle cx="135" cy="225" r="50" fill="none" stroke="#10b981" stroke-width="2.5" filter="url(#phosphor-glow)">
-            <animate attributeName="stroke-opacity" values="0.6;1;0.6" dur="2.2s" repeatCount="indefinite" />
-            <animate attributeName="stroke-width" values="2;3.2;2" dur="2.2s" repeatCount="indefinite" />
-          </circle>
-
-          <!-- Avatar Illustration (Clipped to Circle r=50 at 135, 225) -->
-          <g clip-path="url(#avatar-clip)">
-            <!-- Dark Ambient Workstation Room Background -->
-            <rect x="80" y="170" width="110" height="110" fill="url(#avatar-bg)" />
-
-            <!-- Digital Matrix / Code Rain Streams in Background -->
-            <text x="88" y="190" font-size="6.5" fill="#10b981" opacity="0.3" font-family="monospace">010110</text>
-            <text x="88" y="200" font-size="6.5" fill="#10b981" opacity="0.25" font-family="monospace">SYS_OK</text>
-            <text x="88" y="210" font-size="6.5" fill="#10b981" opacity="0.2" font-family="monospace">KERNEL</text>
-            <text x="160" y="190" font-size="6.5" fill="#38bdf8" opacity="0.3" font-family="monospace">110010</text>
-            <text x="160" y="200" font-size="6.5" fill="#38bdf8" opacity="0.25" font-family="monospace">DEVBOX</text>
-            <text x="160" y="210" font-size="6.5" fill="#38bdf8" opacity="0.2" font-family="monospace">NET_UP</text>
-
-            <!-- Workstation Screen Reflection Gradient (Light illuminating from below) -->
-            <rect x="80" y="215" width="110" height="70" fill="url(#term-ambient-glow)" opacity="0.55" />
-
-            <!-- Torso: Dark Hoodie with Gentle Breathing Animation -->
-            <g class="avatar-shoulders">
-              <!-- Dark Hoodie Body -->
-              <path d="M 92 278 Q 98 252 118 245 Q 135 248 152 245 Q 172 252 178 278 Z" fill="#0f172a" />
-              <!-- Hoodie Seams and Shadows -->
-              <path d="M 118 245 Q 135 258 152 245 L 147 278 L 123 278 Z" fill="#0b111e" />
-              <!-- Inner T-shirt Collar -->
-              <path d="M 125 247 Q 135 253 145 247 L 142 258 Q 135 262 128 258 Z" fill="#05080f" />
-              <!-- Hoodie Drawstrings -->
-              <line x1="127" y1="250" x2="125" y2="270" stroke="#334155" stroke-width="1.4" />
-              <line x1="143" y1="250" x2="145" y2="270" stroke="#334155" stroke-width="1.4" />
-            </g>
-
-            <!-- Over-Ear Monitoring Headphones -->
-            <!-- Padded Cushioned Headband arched over head -->
-            <path d="M 109 214 Q 107 182 135 180 Q 163 182 161 214" fill="none" stroke="#1e293b" stroke-width="5.5" stroke-linecap="round" />
-            <path d="M 109 214 Q 107 182 135 180 Q 163 182 161 214" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-linecap="round" opacity="0.75" />
-            
-            <!-- Left Over-Ear Monitor Earcup -->
-            <rect x="104" y="206" width="11" height="22" rx="4.5" fill="#0b121e" stroke="#38bdf8" stroke-width="1.2" />
-            <circle cx="109.5" cy="217" r="2.2" fill="#10b981" />
-            
-            <!-- Right Over-Ear Monitor Earcup -->
-            <rect x="155" y="206" width="11" height="22" rx="4.5" fill="#0b121e" stroke="#38bdf8" stroke-width="1.2" />
-            <circle cx="160.5" cy="217" r="2.2" fill="#10b981" />
-
-            <!-- Neck -->
-            <polygon points="126,232 144,232 141,248 129,248" fill="#c08552" />
-            <polygon points="128,236 142,236 140,244 130,244" fill="#a46d3e" opacity="0.6" />
-
-            <!-- Head Base and Jaw -->
-            <path d="M 118 210 Q 118 234 135 237 Q 152 234 152 210 Q 152 188 135 188 Q 118 188 118 210 Z" fill="#d89f6d" />
-
-            <!-- Focused Mouth -->
-            <path d="M 131 229 Q 135 231.5 139 229" fill="none" stroke="#875329" stroke-width="1.3" stroke-linecap="round" />
-            <!-- Nose -->
-            <path d="M 135 220 L 133 223 L 137 223" fill="none" stroke="#a46d3e" stroke-width="1" stroke-linejoin="round" />
-
-            <!-- Eyes Group with Natural Blinking Animation -->
-            <g class="avatar-eyes-group">
-              <!-- Left Eye -->
-              <ellipse cx="127" cy="216" rx="3.2" ry="2" fill="#ffffff" />
-              <circle cx="127.5" cy="216" r="1.5" fill="#111827" />
-              <circle cx="128" cy="215.3" r="0.6" fill="#10b981" />
-              <!-- Right Eye -->
-              <ellipse cx="143" cy="216" rx="3.2" ry="2" fill="#ffffff" />
-              <circle cx="142.5" cy="216" r="1.5" fill="#111827" />
-              <circle cx="143" cy="215.3" r="0.6" fill="#10b981" />
-              <!-- Eyebrows -->
-              <path d="M 123 212 Q 127 211 131 213" fill="none" stroke="#090d16" stroke-width="1.4" stroke-linecap="round" />
-              <path d="M 147 212 Q 143 211 139 213" fill="none" stroke="#090d16" stroke-width="1.4" stroke-linecap="round" />
-            </g>
-
-            <!-- Cyber Glasses with real-time glowing CRT lens reflections -->
-            <!-- Cyber Frames -->
-            <rect x="121" y="211" width="12" height="9.5" rx="2" fill="none" stroke="#38bdf8" stroke-width="1.3" opacity="0.9" />
-            <rect x="137" y="211" width="12" height="9.5" rx="2" fill="none" stroke="#38bdf8" stroke-width="1.3" opacity="0.9" />
-            <!-- Cyber Bridge and Temples extending to headphones -->
-            <line x1="133" y1="215" x2="137" y2="215" stroke="#38bdf8" stroke-width="1.4" />
-            <line x1="114" y1="214" x2="121" y2="214" stroke="#38bdf8" stroke-width="1.2" />
-            <line x1="149" y1="214" x2="156" y2="214" stroke="#38bdf8" stroke-width="1.2" />
-
-            <!-- Real-Time Glowing CRT Lens Reflections -->
-            <g class="lens-glint">
-              <line x1="122" y1="219" x2="131" y2="212" stroke="#10b981" stroke-width="1.6" opacity="0.9" filter="url(#phosphor-glow)" />
-              <line x1="138" y1="219" x2="147" y2="212" stroke="#10b981" stroke-width="1.6" opacity="0.9" filter="url(#phosphor-glow)" />
-            </g>
-
-            <!-- Tousled Dark Hair (Layered Anime/Cyberpunk Strands) -->
-            <!-- Hair Base Back -->
-            <path d="M 117 205 Q 113 189 127 183 Q 138 181 145 183 Q 157 189 153 205 Z" fill="#0b0f19" />
-            <!-- Tousled Front Bangs and Loose Locks -->
-            <path d="M 115 198 Q 121 190 127 197 Q 133 186 139 196 Q 146 188 152 196 Q 155 204 151 210 Q 148 200 143 206 Q 138 198 133 208 Q 129 198 123 206 Q 118 200 115 208 Z" fill="#131d2e" />
-            <path d="M 119 194 Q 127 184 135 190 Q 142 182 149 192 Q 145 200 140 194 Q 132 200 125 194 Z" fill="#1b283d" />
-            <!-- Stray messy hair spikes -->
-            <path d="M 121 186 L 116 180 L 124 184 Z" fill="#131d2e" />
-            <path d="M 132 182 L 134 176 L 138 182 Z" fill="#1b283d" />
-            <path d="M 144 184 L 151 178 L 147 186 Z" fill="#131d2e" />
-            <path d="M 153 190 L 159 188 L 154 195 Z" fill="#131d2e" />
-            
-            <!-- Emerald neon highlight reflection on tousled hair fringe -->
-            <path d="M 122 198 Q 127 192 132 199" fill="none" stroke="#10b981" stroke-width="1.2" opacity="0.75" />
-            <path d="M 137 197 Q 142 191 147 198" fill="none" stroke="#10b981" stroke-width="1.2" opacity="0.75" />
-
-            <!-- Animated Vertical Scanning Laser Beam Sweep across Face -->
-            <g>
-              <line x1="80" y1="175" x2="190" y2="175" stroke="#10b981" stroke-width="1.8" filter="url(#phosphor-glow)">
-                <animate attributeName="y1" values="175;275;175" dur="2.6s" repeatCount="indefinite" />
-                <animate attributeName="y2" values="175;275;175" dur="2.6s" repeatCount="indefinite" />
-                <animate attributeName="stroke-opacity" values="0.65;1;0.65" dur="2.6s" repeatCount="indefinite" />
-              </line>
-              <rect x="80" y="165" width="110" height="12" fill="url(#laser-beam-gradient)" opacity="0.32">
-                <animate attributeName="y" values="165;265;165" dur="2.6s" repeatCount="indefinite" />
-              </rect>
-            </g>
-
-            <!-- Scanline flicker over avatar -->
-            <rect x="80" y="170" width="110" height="110" fill="url(#scanlines)" opacity="0.45" pointer-events="none" />
+          <!-- Torso: Dark Hoodie with Gentle Breathing Animation -->
+          <g class="avatar-shoulders">
+            <path d="M 58 214 Q 64 190 80 184 Q 95 186 110 184 Q 126 190 132 214 Z" fill="#161b22" stroke="#30363d" stroke-width="1" />
+            <path d="M 80 184 Q 95 196 110 184 L 106 214 L 84 214 Z" fill="#0d1117" />
+            <path d="M 86 186 Q 95 192 104 186 L 102 195 Q 95 198 88 195 Z" fill="#21262d" />
+            <line x1="88" y1="189" x2="86" y2="206" stroke="#484f58" stroke-width="1.2" />
+            <line x1="102" y1="189" x2="104" y2="206" stroke="#484f58" stroke-width="1.2" />
           </g>
 
-          <!-- Live Telemetry Status Tag directly below Avatar -->
-          <g transform="translate(86, 288)">
-            <rect x="0" y="0" width="98" height="20" rx="4" fill="#0b171f" stroke="#10b981" stroke-width="1" />
-            <circle cx="12" cy="10" r="3" class="blinking-cursor" />
-            <text x="22" y="14" font-size="9.5" fill="#10b981" font-weight="700" letter-spacing="0.5">DEV // ONLINE</text>
+          <!-- Over-Ear Studio Monitoring Headphones -->
+          <path d="M 72 156 Q 70 126 95 125 Q 120 126 118 156" fill="none" stroke="#21262d" stroke-width="5" stroke-linecap="round" />
+          <path d="M 72 156 Q 70 126 95 125 Q 120 126 118 156" fill="none" stroke="#58a6ff" stroke-width="1" stroke-linecap="round" opacity="0.8" />
+          <!-- Left Earcup -->
+          <rect x="67" y="148" width="10" height="20" rx="4" fill="#0d1117" stroke="#30363d" stroke-width="1" />
+          <circle cx="72" cy="158" r="1.8" fill="#3fb950" />
+          <!-- Right Earcup -->
+          <rect x="113" y="148" width="10" height="20" rx="4" fill="#0d1117" stroke="#30363d" stroke-width="1" />
+          <circle cx="118" cy="158" r="1.8" fill="#3fb950" />
+
+          <!-- Neck -->
+          <polygon points="87,172 103,172 101,186 89,186" fill="#c08552" />
+
+          <!-- Head and Jaw -->
+          <path d="M 80 152 Q 80 174 95 177 Q 110 174 110 152 Q 110 133 95 133 Q 80 133 80 152 Z" fill="#d89f6d" />
+
+          <!-- Focused Smile and Nose -->
+          <path d="M 91 169 Q 95 171 99 169" fill="none" stroke="#875329" stroke-width="1.2" stroke-linecap="round" />
+          <path d="M 95 161 L 93 164 L 97 164" fill="none" stroke="#a46d3e" stroke-width="1" stroke-linejoin="round" />
+
+          <!-- Eyes Group with Blinking Animation -->
+          <g class="avatar-eyes-group">
+            <ellipse cx="88" cy="157" rx="3" ry="1.8" fill="#ffffff" />
+            <circle cx="88.5" cy="157" r="1.4" fill="#0d1117" />
+            <ellipse cx="102" cy="157" rx="3" ry="1.8" fill="#ffffff" />
+            <circle cx="101.5" cy="157" r="1.4" fill="#0d1117" />
+            <path d="M 85 153 Q 88 152 91 154" fill="none" stroke="#0d1117" stroke-width="1.2" stroke-linecap="round" />
+            <path d="M 105 153 Q 102 152 99 154" fill="none" stroke="#0d1117" stroke-width="1.2" stroke-linecap="round" />
           </g>
 
-          <!-- System ID sub-tags -->
-          <text x="135" y="324" text-anchor="middle" font-size="9" fill="#38bdf8" letter-spacing="1">[ID: #898-DROID]</text>
-          <text x="135" y="338" text-anchor="middle" font-size="8.5" fill="#64748b" letter-spacing="0.8">SYSTEM: ONLINE (60Hz)</text>
+          <!-- Modern Wireframe Glasses -->
+          <rect x="83" y="152" width="11" height="9" rx="2" fill="none" stroke="#58a6ff" stroke-width="1.2" />
+          <rect x="96" y="152" width="11" height="9" rx="2" fill="none" stroke="#58a6ff" stroke-width="1.2" />
+          <line x1="94" y1="156" x2="96" y2="156" stroke="#58a6ff" stroke-width="1.2" />
+          <line x1="77" y1="155" x2="83" y2="155" stroke="#58a6ff" stroke-width="1" />
+          <line x1="107" y1="155" x2="113" y2="155" stroke="#58a6ff" stroke-width="1" />
+          <!-- Subtle White Lens Glint -->
+          <line x1="84" y1="159" x2="91" y2="153" stroke="#f0f6fc" stroke-width="1.2" opacity="0.7" />
+          <line x1="97" y1="159" x2="104" y2="153" stroke="#f0f6fc" stroke-width="1.2" opacity="0.7" />
+
+          <!-- Tousled Dark Hair -->
+          <path d="M 79 148 Q 75 133 88 128 Q 97 126 103 128 Q 115 133 111 148 Z" fill="#161b22" />
+          <path d="M 77 141 Q 83 133 88 140 Q 94 130 99 139 Q 105 131 110 139 Q 113 147 109 152 Q 106 143 102 148 Q 98 141 94 150 Q 90 141 85 148 Q 80 143 77 149 Z" fill="#21262d" />
+          <path d="M 83 131 L 78 126 L 85 129 Z" fill="#161b22" />
+          <path d="M 94 128 L 95 122 L 98 128 Z" fill="#21262d" />
+          <path d="M 103 129 L 109 124 L 106 131 Z" fill="#161b22" />
         </g>
 
-        <!-- Vertical Neofetch Divider -->
-        <line x1="235" y1="118" x2="235" y2="440" stroke="#13231e" stroke-width="1.5" stroke-dasharray="3 3" />
-
-        <!-- Neofetch System Information Table -->
-        <g transform="translate(255, 118)" font-size="12.5">
-          <text x="0" y="18">
-            <tspan class="t-bright" font-size="14">japanchicken898-droid</tspan>
-            <tspan class="t-dim">@</tspan>
-            <tspan class="t-cyan" font-size="14">devbox</tspan>
-          </text>
-          <text x="0" y="34" fill="#1e293b">----------------------------------------------------</text>
-          
-          <text x="0" y="60">
-            <tspan class="t-cyan" font-weight="600">Identity    </tspan> <tspan class="t-dim">::</tspan> <tspan class="t-bright">Deepak Bathirachalam</tspan>
-          </text>
-          <text x="0" y="86">
-            <tspan class="t-cyan" font-weight="600">Academic    </tspan> <tspan class="t-dim">::</tspan> <tspan fill="#ecfdf5">2nd Year B.Tech IT (Graduating 2029)</tspan>
-          </text>
-          <text x="0" y="112">
-            <tspan class="t-cyan" font-weight="600">Environment </tspan> <tspan class="t-dim">::</tspan> <tspan class="t-title">macOS</tspan> <tspan class="t-dim">•</tspan> <tspan class="t-title">zsh</tspan> <tspan class="t-dim">•</tspan> <tspan class="t-title">tmux</tspan> <tspan class="t-dim">•</tspan> <tspan class="t-title">Neovim</tspan>
-          </text>
-          <text x="0" y="138">
-            <tspan class="t-cyan" font-weight="600">Status      </tspan> <tspan class="t-dim">::</tspan> <tspan class="t-gold">Open to Summer Internships 🚀</tspan>
-          </text>
-          <text x="0" y="164">
-            <tspan class="t-cyan" font-weight="600">Discipline  </tspan> <tspan class="t-dim">::</tspan> <tspan fill="#a7f3d0">Competitive Coding, Edge AI &amp; Systems Dev</tspan>
-          </text>
-          <text x="0" y="190">
-            <tspan class="t-cyan" font-weight="600">Core Stack  </tspan> <tspan class="t-dim">::</tspan> <tspan class="t-bright">Python • Java • TypeScript • C++ • FastAPI</tspan>
-          </text>
-          <text x="0" y="216">
-            <tspan class="t-cyan" font-weight="600">Kernel      </tspan> <tspan class="t-dim">::</tspan> <tspan class="t-dim">Darwin 24.1.0 arm64 • Terminal xterm-256color</tspan>
-          </text>
-          
-          <!-- Terminal Color Palette Blocks -->
-          <g transform="translate(0, 246)">
-            <rect x="0" y="0" width="22" height="12" rx="2" fill="#ef4444" />
-            <rect x="28" y="0" width="22" height="12" rx="2" fill="#f97316" />
-            <rect x="56" y="0" width="22" height="12" rx="2" fill="#f59e0b" />
-            <rect x="84" y="0" width="22" height="12" rx="2" fill="#10b981" />
-            <rect x="112" y="0" width="22" height="12" rx="2" fill="#06b6d4" />
-            <rect x="140" y="0" width="22" height="12" rx="2" fill="#3b82f6" />
-            <rect x="168" y="0" width="22" height="12" rx="2" fill="#8b5cf6" />
-            <rect x="196" y="0" width="22" height="12" rx="2" fill="#ec4899" />
-          </g>
-
-          <text x="0" y="286" font-size="11.5" fill="#64748b">
-            Uptime: 24/7 continuous code execution &amp; algorithmic tuning.
-          </text>
+        <!-- Live Telemetry Tag -->
+        <g transform="translate(50, 222)">
+          <rect x="0" y="0" width="90" height="18" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1" />
+          <circle cx="12" cy="9" r="3" fill="#3fb950" />
+          <text x="22" y="13" font-size="9" fill="#3fb950" font-weight="700">DEV // ONLINE</text>
         </g>
-
-        <!-- Bottom Status Line -->
-        <text x="40" y="475" font-size="12" fill="#059669">
-          [Screen 1/4] Biometric handshake verified. Loading core showcase systems...
-        </text>
+        <text x="95" y="254" text-anchor="middle" font-size="9" fill="#8b949e">[ID: #898-DROID]</text>
+        <text x="95" y="267" text-anchor="middle" font-size="8.5" fill="#484f58">DARWIN / ARM64</text>
       </g>
+
+      <!-- Vertical Section Divider -->
+      <line x1="205" y1="45" x2="205" y2="295" stroke="#30363d" stroke-width="1" />
+
+      <!-- Neofetch Right-Side Spec Table -->
+      <g transform="translate(225, 45)" font-size="12">
+        <text x="0" y="16">
+          <tspan class="c-cyan" font-size="13.5">japanchicken898-droid</tspan>
+          <tspan class="c-muted">@</tspan>
+          <tspan class="c-title" font-size="13.5">devbox</tspan>
+        </text>
+        <line x1="0" y1="28" x2="520" y2="28" stroke="#30363d" stroke-width="1" />
+        
+        <text x="0" y="52">
+          <tspan class="c-muted">Identity    :: </tspan>
+          <tspan class="c-body" font-weight="600">Deepak Bathirachalam</tspan>
+        </text>
+        <text x="0" y="76">
+          <tspan class="c-muted">Academic    :: </tspan>
+          <tspan class="c-body">2nd Year B.Tech IT (Graduating 2029)</tspan>
+        </text>
+        <text x="0" y="100">
+          <tspan class="c-muted">Environment :: </tspan>
+          <tspan class="c-title">macOS</tspan> <tspan class="c-muted">•</tspan>
+          <tspan class="c-title">zsh</tspan> <tspan class="c-muted">•</tspan>
+          <tspan class="c-title">tmux</tspan> <tspan class="c-muted">•</tspan>
+          <tspan class="c-title">Neovim</tspan>
+        </text>
+        <text x="0" y="124">
+          <tspan class="c-muted">Status      :: </tspan>
+          <tspan class="c-green">Open to Summer Internships 🚀</tspan>
+        </text>
+        <text x="0" y="148">
+          <tspan class="c-muted">Discipline  :: </tspan>
+          <tspan class="c-body">Competitive Coding, Edge AI &amp; Systems Dev</tspan>
+        </text>
+        <text x="0" y="172">
+          <tspan class="c-muted">Core Stack  :: </tspan>
+          <tspan class="c-cyan">Python • Java • TypeScript • C++ • FastAPI</tspan>
+        </text>
+        <text x="0" y="196">
+          <tspan class="c-muted">Kernel      :: </tspan>
+          <tspan class="c-muted">Darwin 24.1.0 arm64 • Terminal xterm-256color</tspan>
+        </text>
+
+        <!-- Classic Terminal Palette Blocks -->
+        <g transform="translate(0, 218)">
+          <rect x="0" y="0" width="22" height="11" rx="2" fill="#ff5f56" />
+          <rect x="28" y="0" width="22" height="11" rx="2" fill="#ffbd2e" />
+          <rect x="56" y="0" width="22" height="11" rx="2" fill="#27c93f" />
+          <rect x="84" y="0" width="22" height="11" rx="2" fill="#58a6ff" />
+          <rect x="112" y="0" width="22" height="11" rx="2" fill="#bc8cff" />
+          <rect x="140" y="0" width="22" height="11" rx="2" fill="#39c5cf" />
+          <rect x="168" y="0" width="22" height="11" rx="2" fill="#f0f6fc" />
+          <rect x="196" y="0" width="22" height="11" rx="2" fill="#484f58" />
+        </g>
+      </g>
+
+      <!-- Bottom Status Line -->
+      <text x="0" y="332" font-size="11" class="c-muted">
+        [Screen 1/4] Biometric handshake verified. Loading core showcase systems...
+      </text>
     </g>
 
 
-    <!-- ==================== SCREEN 2: FEATURED SYSTEMS SHOWCASE ==================== -->
-    <g class="term-text" filter="url(#phosphor-glow)">
-      <!-- Command prompt -->
-      <g class="s2-c">
-        <text x="40" y="88" font-size="13">
-          <tspan class="t-prompt">➜ </tspan>
-          <tspan class="t-user">japanchicken898-droid</tspan><tspan class="t-dim">@</tspan><tspan class="t-cyan">matrix-core</tspan>
-          <tspan class="t-dim">:</tspan><tspan class="t-prompt">~</tspan><tspan class="t-dim">$</tspan>
-          <tspan class="t-cmd"> ./run_showcase.sh --featured-systems --verbose</tspan>
+    <!-- ==================== SCREEN 2: 4 FEATURED PROJECTS ==================== -->
+    <g class="screen-2" transform="translate(40, 75)">
+      <!-- Command Prompt -->
+      <text x="0" y="16" font-size="13">
+        <tspan class="c-prompt-arr">➜ </tspan>
+        <tspan class="c-prompt-dir">~ </tspan>
+        <tspan class="c-prompt-cmd">./run_showcase.sh --featured-systems</tspan>
+      </text>
+      <text x="0" y="38" font-size="10.5" class="c-muted">
+        &gt;&gt;&gt; DEPLOYED CORE ARCHITECTURAL SYSTEMS [4/4 OPERATIONAL]
+      </text>
+
+      <!-- Project 1: Ocular -->
+      <g transform="translate(0, 48)">
+        <rect x="0" y="0" width="770" height="58" rx="6" class="c-card" />
+        <text x="16" y="20" font-size="12.5">
+          <tspan class="c-title">[ 01 ] 👁️ OCULAR </tspan>
+          <tspan class="c-body">— Visual Automation &amp; Meta SAM Compiler</tspan>
         </text>
-        <text x="40" y="114" font-size="11" fill="#059669" letter-spacing="1">
-          &gt;&gt;&gt; INITIALIZING 4 CORE PRODUCTION &amp; RESEARCH ARCHITECTURES
+        <text x="16" y="37" font-size="11" class="c-muted">
+          Translates raw video input into Playwright automation scripts &amp; FastAPI services via Meta SAM.
         </text>
+        <text x="16" y="50" class="c-tag">
+          STACK: Meta SAM • Playwright • FastAPI • Python • Computer Vision Pipelines
+        </text>
+        <text x="754" y="20" font-size="10" class="c-green" text-anchor="end">ACTIVE ●</text>
       </g>
 
-      <!-- System 1: Ocular -->
-      <g class="s2-1" transform="translate(40, 126)">
-        <rect x="0" y="0" width="770" height="74" rx="6" fill="#0e1720" stroke="#1e3a2f" stroke-width="1.2" />
-        <text x="18" y="24" font-size="13">
-          <tspan class="t-gold">[ 01 ] 👁️ OCULAR </tspan>
-          <tspan class="t-bright">— Visual Automation &amp; SAM Compiler</tspan>
+      <!-- Project 2: CareerLens -->
+      <g transform="translate(0, 114)">
+        <rect x="0" y="0" width="770" height="58" rx="6" class="c-card" />
+        <text x="16" y="20" font-size="12.5">
+          <tspan class="c-title">[ 02 ] 🎯 CAREERLENS </tspan>
+          <tspan class="c-body">— Employability Proof-of-Work Telemetry Engine</tspan>
         </text>
-        <text x="36" y="45" font-size="11.5" fill="#a7f3d0">
-          Translates raw video input into Playwright automation scripts &amp; FastAPI microservices via Meta SAM.
+        <text x="16" y="37" font-size="11" class="c-muted">
+          Employability audit engine cross-verifying resume claims against GitHub &amp; LeetCode telemetry.
         </text>
-        <text x="36" y="63" font-size="10.5" fill="#64748b">
-          STACK: Meta SAM (Segment Anything) • Playwright • FastAPI • Python • Computer Vision Pipelines
+        <text x="16" y="50" class="c-tag">
+          STACK: Telemetry Engine • GitHub REST/GraphQL API • LeetCode Graph • Next.js • Python
         </text>
-        <text x="735" y="24" font-size="10" fill="#10b981" text-anchor="end">STATUS: ACTIVE ●</text>
+        <text x="754" y="20" font-size="10" class="c-cyan" text-anchor="end">VERIFIED ●</text>
       </g>
 
-      <!-- System 2: CareerLens -->
-      <g class="s2-2" transform="translate(40, 208)">
-        <rect x="0" y="0" width="770" height="74" rx="6" fill="#0e1720" stroke="#1e293b" stroke-width="1.2" />
-        <text x="18" y="24" font-size="13">
-          <tspan class="t-cyan">[ 02 ] 🎯 CAREERLENS </tspan>
-          <tspan class="t-bright">— Employability Proof-of-Work Telemetry Engine</tspan>
+      <!-- Project 3: BayLog -->
+      <g transform="translate(0, 180)">
+        <rect x="0" y="0" width="770" height="58" rx="6" class="c-card" />
+        <text x="16" y="20" font-size="12.5">
+          <tspan class="c-title">[ 03 ] ⚡ BAYLOG </tspan>
+          <tspan class="c-body">— Real-Time Clinical Resuscitation Decision Engine</tspan>
         </text>
-        <text x="36" y="45" font-size="11.5" fill="#a7f3d0">
-          Employability audit engine cross-verifying resume claims against GitHub &amp; LeetCode telemetry (Data Quest 3.0).
+        <text x="16" y="37" font-size="11" class="c-muted">
+          Low-latency voice-driven Code Blue clinical resuscitation decision engine deployed on cloud infra.
         </text>
-        <text x="36" y="63" font-size="10.5" fill="#64748b">
-          STACK: Telemetry Analysis • GitHub API • LeetCode Graph • Next.js • Python • Verification Algorithms
-        </text>
-        <text x="735" y="24" font-size="10" fill="#38bdf8" text-anchor="end">STATUS: VERIFIED ●</text>
-      </g>
-
-      <!-- System 3: Sim Resus Z -->
-      <g class="s2-3" transform="translate(40, 290)">
-        <rect x="0" y="0" width="770" height="74" rx="6" fill="#0e1720" stroke="#1e293b" stroke-width="1.2" />
-        <text x="18" y="24" font-size="13">
-          <tspan class="t-prompt">[ 03 ] ⚡ SIM RESUS Z </tspan>
-          <tspan class="t-bright">— Real-Time Code Blue Decision Engine</tspan>
-        </text>
-        <text x="36" y="45" font-size="11.5" fill="#a7f3d0">
-          Ultra low-latency voice-driven Code Blue clinical resuscitation decision engine deployed on cloud infra.
-        </text>
-        <text x="36" y="63" font-size="10.5" fill="#64748b">
+        <text x="16" y="50" class="c-tag">
           STACK: Voice AI • Low-Latency Audio Streaming • Clinical Decision Trees • Cloud Infrastructure
         </text>
-        <text x="735" y="24" font-size="10" fill="#10b981" text-anchor="end">STATUS: DEPLOYED ●</text>
+        <text x="754" y="20" font-size="10" class="c-green" text-anchor="end">DEPLOYED ●</text>
       </g>
 
-      <!-- System 4: AquaTrack -->
-      <g class="s2-4" transform="translate(40, 372)">
-        <rect x="0" y="0" width="770" height="74" rx="6" fill="#0e1720" stroke="#1e293b" stroke-width="1.2" />
-        <text x="18" y="24" font-size="13">
-          <tspan class="t-title">[ 04 ] 🌊 AQUATRACK </tspan>
-          <tspan class="t-bright">— IoT Water Safety Telemetry Stream</tspan>
+      <!-- Project 4: AquaTrack -->
+      <g transform="translate(0, 246)">
+        <rect x="0" y="0" width="770" height="58" rx="6" class="c-card" />
+        <text x="16" y="20" font-size="12.5">
+          <tspan class="c-title">[ 04 ] 🌊 AQUATRACK </tspan>
+          <tspan class="c-body">— IoT Water Safety Telemetry Stream</tspan>
         </text>
-        <text x="36" y="45" font-size="11.5" fill="#a7f3d0">
+        <text x="16" y="37" font-size="11" class="c-muted">
           IoT water safety telemetry system built with ESP32 and analog sensor arrays streaming real-time to Flutter.
         </text>
-        <text x="36" y="63" font-size="10.5" fill="#64748b">
+        <text x="16" y="50" class="c-tag">
           STACK: ESP32 Microcontrollers • C++ • Analog Sensor Arrays • Real-Time WebSockets • Flutter
         </text>
-        <text x="735" y="24" font-size="10" fill="#38bdf8" text-anchor="end">STATUS: STREAMING ●</text>
+        <text x="754" y="20" font-size="10" class="c-cyan" text-anchor="end">STREAMING ●</text>
       </g>
 
-      <g class="s2-4">
-        <text x="40" y="475" font-size="12" fill="#059669">
-          [Screen 2/4] All 4 systems operational. Telemetry feed cycling to achievements...
-        </text>
-      </g>
+      <!-- Bottom Status Line -->
+      <text x="0" y="332" font-size="11" class="c-muted">
+        [Screen 2/4] All 4 systems operational. Telemetry feed cycling to achievements...
+      </text>
     </g>
 
 
-    <!-- ==================== SCREEN 3: ACHIEVEMENTS and HACKATHONS ==================== -->
-    <g class="term-text" filter="url(#phosphor-glow)">
-      <!-- Command prompt -->
-      <g class="s3-c">
-        <text x="40" y="88" font-size="13">
-          <tspan class="t-prompt">➜ </tspan>
-          <tspan class="t-user">japanchicken898-droid</tspan><tspan class="t-dim">@</tspan><tspan class="t-cyan">matrix-core</tspan>
-          <tspan class="t-dim">:</tspan><tspan class="t-prompt">~</tspan><tspan class="t-dim">$</tspan>
-          <tspan class="t-cmd"> ./fetch_achievements.sh --track-record --verbose</tspan>
-        </text>
-        <text x="40" y="114" font-size="11" fill="#059669" letter-spacing="1">
-          &gt;&gt;&gt; SCANNING COMPETITIVE RECORDS &amp; HACKATHON DATABASE [FOUND: 3 MILESTONES]
-        </text>
-      </g>
+    <!-- ==================== SCREEN 3: ACHIEVEMENTS & TRACK RECORD ==================== -->
+    <g class="screen-3" transform="translate(40, 75)">
+      <!-- Command Prompt -->
+      <text x="0" y="16" font-size="13">
+        <tspan class="c-prompt-arr">➜ </tspan>
+        <tspan class="c-prompt-dir">~ </tspan>
+        <tspan class="c-prompt-cmd">./fetch_achievements.sh --track-record --verbose</tspan>
+      </text>
+      <text x="0" y="38" font-size="10.5" class="c-muted">
+        &gt;&gt;&gt; SCANNING COMPETITIVE RECORDS &amp; HACKATHON DATABASE [FOUND: 3 MILESTONES]
+      </text>
 
-      <!-- Achievement Card 1: API Heist Winner -->
-      <g class="s3-1" transform="translate(40, 130)">
-        <rect x="0" y="0" width="770" height="82" rx="6" fill="#0e1720" stroke="#1e3a2f" stroke-width="1.2" />
-        <text x="18" y="28" font-size="13.5">
-          <tspan class="t-gold">[ 01 ] 🏆 1st PLACE WINNER </tspan>
-          <tspan class="t-bright">— API Heist @ TechnoVIT (VIT Chennai)</tspan>
+      <!-- Achievement 1: 1st Place API Heist -->
+      <g transform="translate(0, 48)">
+        <rect x="0" y="0" width="770" height="66" rx="6" class="c-card" />
+        <text x="16" y="22" font-size="13">
+          <tspan class="c-title">[ 01 ] 🏆 1st PLACE WINNER </tspan>
+          <tspan class="c-body">— API Heist @ TechnoVIT (VIT Chennai)</tspan>
         </text>
-        <text x="36" y="52" font-size="12" fill="#a7f3d0">
+        <text x="32" y="42" font-size="11" class="c-muted">
           └─ Outperformed 50+ collegiate engineering teams in an intense 24hr innovation hackathon.
         </text>
-        <text x="36" y="70" font-size="11.5" fill="#64748b">
+        <text x="32" y="56" font-size="11" class="c-muted">
           └─ Focus: High-throughput API gateway, resilient microservices &amp; real-time event pipeline.
         </text>
       </g>
 
-      <!-- Achievement Card 2: National Hackathon Finalist -->
-      <g class="s3-2" transform="translate(40, 224)">
-        <rect x="0" y="0" width="770" height="82" rx="6" fill="#0e1720" stroke="#1e293b" stroke-width="1.2" />
-        <text x="18" y="28" font-size="13.5">
-          <tspan class="t-cyan">[ 02 ] 🎯 NATIONAL HACKATHON FINALIST </tspan>
-          <tspan class="t-bright">— Data Quest 3.0 &amp; Premier Challenges</tspan>
+      <!-- Achievement 2: National Finalist -->
+      <g transform="translate(0, 122)">
+        <rect x="0" y="0" width="770" height="66" rx="6" class="c-card" />
+        <text x="16" y="22" font-size="13">
+          <tspan class="c-title">[ 02 ] 🎯 NATIONAL HACKATHON FINALIST </tspan>
+          <tspan class="c-body">— Data Quest 3.0 &amp; Premier Challenges</tspan>
         </text>
-        <text x="36" y="52" font-size="12" fill="#a7f3d0">
+        <text x="32" y="42" font-size="11" class="c-muted">
           └─ Qualified among the top tier nationwide through rigorous algorithmic problem rounds.
         </text>
-        <text x="36" y="70" font-size="11.5" fill="#64748b">
+        <text x="32" y="56" font-size="11" class="c-muted">
           └─ Focus: Prototype engineering, distributed data pipelines &amp; architectural defense.
         </text>
       </g>
 
-      <!-- Achievement Card 3: Competitive Programming and Graph Algorithms -->
-      <g class="s3-3" transform="translate(40, 318)">
-        <rect x="0" y="0" width="770" height="82" rx="6" fill="#0e1720" stroke="#1e293b" stroke-width="1.2" />
-        <text x="18" y="28" font-size="13.5">
-          <tspan class="t-prompt">[ 03 ] ⚡ DATA STRUCTURES &amp; GRAPH ALGORITHMS </tspan>
-          <tspan class="t-bright">— Competitive Solver</tspan>
+      <!-- Achievement 3: Competitive Programming -->
+      <g transform="translate(0, 196)">
+        <rect x="0" y="0" width="770" height="66" rx="6" class="c-card" />
+        <text x="16" y="22" font-size="13">
+          <tspan class="c-title">[ 03 ] ⚡ DATA STRUCTURES &amp; GRAPH ALGORITHMS </tspan>
+          <tspan class="c-body">— Competitive Solver</tspan>
         </text>
-        <text x="36" y="52" font-size="12" fill="#a7f3d0">
+        <text x="32" y="42" font-size="11" class="c-muted">
           └─ Rigorous mastery of Trees, Graph Traversals (Dijkstra, BFS/DFS), DP &amp; Asymptotic Optimization.
         </text>
-        <text x="36" y="70" font-size="11.5" fill="#64748b">
+        <text x="32" y="56" font-size="11" class="c-muted">
           └─ Solved 500+ complex problems with strict focus on optimal time/space complexity bounds.
         </text>
       </g>
 
-      <g class="s3-3">
-        <!-- Compact Stack Summary Strip -->
-        <g transform="translate(40, 412)">
-          <rect x="0" y="0" width="770" height="38" rx="6" fill="#0b171a" stroke="#16313a" stroke-width="1" />
-          <text x="18" y="24" font-size="11.5" class="t-title">
-            STACK :: Python • Java • TypeScript • C++ • FastAPI | Edge ML • Microservices • POSIX Internals
-          </text>
-        </g>
-
-        <text x="40" y="475" font-size="12" fill="#059669">
-          [Screen 3/4] Verified cryptographic records. Opening network dispatch channels...
+      <!-- Compact Stack Strip -->
+      <g transform="translate(0, 270)">
+        <rect x="0" y="0" width="770" height="32" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1" />
+        <text x="16" y="20" font-size="11">
+          <tspan class="c-muted">STACK :: </tspan>
+          <tspan class="c-cyan">Python • Java • TypeScript • C++ • FastAPI</tspan>
+          <tspan class="c-muted"> | </tspan>
+          <tspan class="c-body">Edge ML • Microservices • POSIX Internals</tspan>
         </text>
       </g>
+
+      <!-- Bottom Status Line -->
+      <text x="0" y="332" font-size="11" class="c-muted">
+        [Screen 3/4] Verified cryptographic records. Opening network dispatch channels...
+      </text>
     </g>
 
 
-    <!-- ==================== SCREEN 4: NETWORK and ACTIVE PROMPT ==================== -->
-    <g class="term-text" filter="url(#phosphor-glow)">
-      <!-- Command prompt -->
-      <g class="s4-c">
-        <text x="40" y="88" font-size="13">
-          <tspan class="t-prompt">➜ </tspan>
-          <tspan class="t-user">japanchicken898-droid</tspan><tspan class="t-dim">@</tspan><tspan class="t-cyan">matrix-core</tspan>
-          <tspan class="t-dim">:</tspan><tspan class="t-prompt">~</tspan><tspan class="t-dim">$</tspan>
-          <tspan class="t-cmd"> ./connect --open-channels --status</tspan>
+    <!-- ==================== SCREEN 4: NETWORK & ACTIVE PROMPT ==================== -->
+    <g class="screen-4" transform="translate(40, 75)">
+      <!-- Command Prompt -->
+      <text x="0" y="16" font-size="13">
+        <tspan class="c-prompt-arr">➜ </tspan>
+        <tspan class="c-prompt-dir">~ </tspan>
+        <tspan class="c-prompt-cmd">./connect --open-channels --status</tspan>
+      </text>
+      <text x="0" y="38" font-size="10.5" class="c-muted">
+        &gt;&gt;&gt; SECURE PROTOCOL HANDSHAKE ESTABLISHED (3 PEERS ONLINE)
+      </text>
+
+      <!-- Contact 1: LinkedIn -->
+      <g transform="translate(0, 48)">
+        <rect x="0" y="0" width="770" height="52" rx="6" class="c-card" />
+        <text x="18" y="22" font-size="12" class="c-cyan" font-weight="700">[LINKEDIN]</text>
+        <text x="110" y="22" font-size="12.5" class="c-body" font-weight="600">in/deepak-bathirachalam-517ba62b7</text>
+        <text x="18" y="40" font-size="11" class="c-muted">Channel: Professional Network, Recruitment &amp; Industry Outreach</text>
+        <text x="752" y="28" font-size="10" class="c-green" text-anchor="end">CONNECTED ●</text>
+      </g>
+
+      <!-- Contact 2: GitHub -->
+      <g transform="translate(0, 108)">
+        <rect x="0" y="0" width="770" height="52" rx="6" class="c-card" />
+        <text x="18" y="22" font-size="12" class="c-title" font-weight="700">[GITHUB]  </text>
+        <text x="110" y="22" font-size="12.5" class="c-body" font-weight="600">japanchicken898-droid</text>
+        <text x="18" y="40" font-size="11" class="c-muted">Channel: Codebase Architecture, Problem Solving &amp; Open Source Repositories</text>
+        <text x="752" y="28" font-size="10" class="c-green" text-anchor="end">ACTIVE ●</text>
+      </g>
+
+      <!-- Contact 3: Email -->
+      <g transform="translate(0, 168)">
+        <rect x="0" y="0" width="770" height="52" rx="6" class="c-card" />
+        <text x="18" y="22" font-size="12" class="c-cyan" font-weight="700">[EMAIL]   </text>
+        <text x="110" y="22" font-size="12.5" class="c-body" font-weight="600">japanchicken898@gmail.com</text>
+        <text x="18" y="40" font-size="11" class="c-muted">Channel: Direct Communication, Internship Opportunities &amp; Technical Inquiries</text>
+        <text x="752" y="28" font-size="10" class="c-green" text-anchor="end">INBOX OPEN ●</text>
+      </g>
+
+      <!-- Summary Banner -->
+      <g transform="translate(0, 228)">
+        <rect x="0" y="0" width="770" height="34" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1" />
+        <text x="18" y="21" font-size="11.5" class="c-body">
+          ⚡ <tspan font-weight="600">TARGET:</tspan> Software Engineering &amp; Systems Internships (Target Summer 2025/2026 • Graduating 2029)
         </text>
-        <text x="40" y="114" font-size="11" fill="#059669" letter-spacing="1">
-          &gt;&gt;&gt; SECURE PROTOCOL HANDSHAKE ESTABLISHED (3 PEERS ONLINE)
-        </text>
       </g>
 
-      <!-- Contact Entry 1: LinkedIn -->
-      <g class="s4-1" transform="translate(40, 134)">
-        <rect x="0" y="0" width="770" height="62" rx="6" fill="#0e1720" stroke="#1e293b" stroke-width="1.2" />
-        <text x="20" y="26" font-size="12.5" class="t-cyan" font-weight="700">[LINKEDIN]</text>
-        <text x="130" y="26" font-size="13" class="t-bright">in/deepak-bathirachalam-517ba62b7</text>
-        <text x="20" y="48" font-size="11" fill="#64748b">Channel: Professional Network, Recruitment &amp; Industry Outreach</text>
-        <text x="735" y="34" font-size="11" fill="#10b981" text-anchor="end">STATUS: CONNECTED ●</text>
-      </g>
-
-      <!-- Contact Entry 2: GitHub -->
-      <g class="s4-2" transform="translate(40, 210)">
-        <rect x="0" y="0" width="770" height="62" rx="6" fill="#0e1720" stroke="#1e293b" stroke-width="1.2" />
-        <text x="20" y="26" font-size="12.5" class="t-prompt" font-weight="700">[GITHUB]  </text>
-        <text x="130" y="26" font-size="13" class="t-bright">japanchicken898-droid</text>
-        <text x="20" y="48" font-size="11" fill="#64748b">Channel: Codebase Architecture, Problem Solving &amp; Open Source Repositories</text>
-        <text x="735" y="34" font-size="11" fill="#10b981" text-anchor="end">STATUS: ACTIVE ●</text>
-      </g>
-
-      <!-- Contact Entry 3: Email -->
-      <g class="s4-3" transform="translate(40, 286)">
-        <rect x="0" y="0" width="770" height="62" rx="6" fill="#0e1720" stroke="#1e293b" stroke-width="1.2" />
-        <text x="20" y="26" font-size="12.5" class="t-gold" font-weight="700">[EMAIL]   </text>
-        <text x="130" y="26" font-size="13" class="t-bright">japanchicken898@gmail.com</text>
-        <text x="20" y="48" font-size="11" fill="#64748b">Channel: Direct Communication, Internship Opportunities &amp; Technical Inquiries</text>
-        <text x="735" y="34" font-size="11" fill="#10b981" text-anchor="end">STATUS: INBOX OPEN ●</text>
-      </g>
-
-      <!-- Active Interactive Terminal Prompt with Blinking Cursor -->
-      <g class="s4-p" transform="translate(40, 362)">
-        <rect x="0" y="0" width="770" height="42" rx="6" fill="#0a1a14" stroke="#134e38" stroke-width="1" />
-        <text x="20" y="26" font-size="12" class="t-title">
-          ⚡ TARGET: Software Engineering &amp; Systems Internships (Target Summer 2025/2026 • Graduating 2029).
-        </text>
-
-        <!-- Final prompt with live blinking cursor -->
-        <text x="0" y="82" font-size="13">
-          <tspan class="t-prompt">➜ </tspan>
-          <tspan class="t-user">japanchicken898-droid</tspan><tspan class="t-dim">@</tspan><tspan class="t-cyan">matrix-core</tspan>
-          <tspan class="t-dim">:</tspan><tspan class="t-prompt">~</tspan><tspan class="t-dim">$ </tspan>
-          <tspan class="t-bright" font-weight="600">contact --dispatch-invitation</tspan>
+      <!-- Final Interactive Prompt with Blinking Cursor -->
+      <g transform="translate(0, 285)">
+        <text x="0" y="0" font-size="13">
+          <tspan class="c-prompt-arr">➜ </tspan>
+          <tspan class="c-prompt-dir">~ </tspan>
+          <tspan class="c-body" font-weight="600">contact --dispatch-invitation</tspan>
           <tspan class="blinking-cursor"> ▋</tspan>
         </text>
       </g>
+
+      <!-- Bottom Status Line -->
+      <text x="0" y="332" font-size="11" class="c-muted">
+        [Screen 4/4] End of transmission. Reconnecting in 3 seconds...
+      </text>
     </g>
 
   </g>
-
-  <!-- CRT Screen Scanline Overlay and Curved Monitor Vignette -->
-  <rect x="15" y="55" width="820" height="445" fill="url(#scanlines)" pointer-events="none" />
-  <rect x="15" y="55" width="820" height="445" fill="url(#crt-vignette)" pointer-events="none" />
 </svg>
