@@ -34,7 +34,7 @@
 
     <!-- Circular avatar clip -->
     <clipPath id="avatar-clip">
-      <circle cx="135" cy="225" r="54" />
+      <circle cx="135" cy="225" r="50" />
     </clipPath>
 
     <!-- Workstation ambient glow gradient -->
@@ -42,6 +42,11 @@
       <stop offset="0%" stop-color="#10b981" stop-opacity="0.5" />
       <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.2" />
       <stop offset="100%" stop-color="#0f172a" stop-opacity="0.0" />
+    </linearGradient>
+
+    <linearGradient id="laser-beam-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0.0" />
     </linearGradient>
 
     <radialGradient id="avatar-bg" cx="50%" cy="40%" r="65%">
@@ -296,136 +301,149 @@
       </g>
 
       <g class="s1-b">
-        <!-- ================= HACKER DEVELOPER AVATAR CARD ================= -->
+        <!-- ================= PURE VECTOR CYBER-AVATAR BADGE (~100px) ================= -->
         <g transform="translate(0, 0)">
           <!-- Outer Sci-Fi HUD Bracket Marks -->
-          <path d="M 72 170 L 72 160 L 82 160" fill="none" stroke="#10b981" stroke-width="1.2" opacity="0.6" />
-          <path d="M 198 170 L 198 160 L 188 160" fill="none" stroke="#10b981" stroke-width="1.2" opacity="0.6" />
-          <path d="M 72 280 L 72 290 L 82 290" fill="none" stroke="#10b981" stroke-width="1.2" opacity="0.6" />
-          <path d="M 198 280 L 198 290 L 188 290" fill="none" stroke="#10b981" stroke-width="1.2" opacity="0.6" />
+          <path d="M 76 174 L 76 166 L 84 166" fill="none" stroke="#10b981" stroke-width="1.2" opacity="0.6" />
+          <path d="M 194 174 L 194 166 L 186 166" fill="none" stroke="#10b981" stroke-width="1.2" opacity="0.6" />
+          <path d="M 76 276 L 76 284 L 84 284" fill="none" stroke="#10b981" stroke-width="1.2" opacity="0.6" />
+          <path d="M 194 276 L 194 284 L 186 284" fill="none" stroke="#10b981" stroke-width="1.2" opacity="0.6" />
 
-          <!-- Rotating Cyan Dash Outer Ring -->
-          <circle cx="135" cy="225" r="59" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-dasharray="8 6" opacity="0.75" class="hud-spinner" />
+          <!-- Rotating Cyan Dash Outer HUD Ring -->
+          <circle cx="135" cy="225" r="55" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-dasharray="7 5" opacity="0.75" class="hud-spinner" />
 
-          <!-- Emerald Phosphor Inner Ring -->
-          <circle cx="135" cy="225" r="55" fill="none" stroke="#10b981" stroke-width="2" />
+          <!-- Subtle Pulsing Green Neon Border (#10b981) -->
+          <circle cx="135" cy="225" r="50" fill="none" stroke="#10b981" stroke-width="2.5" filter="url(#phosphor-glow)">
+            <animate attributeName="stroke-opacity" values="0.6;1;0.6" dur="2.2s" repeatCount="indefinite" />
+            <animate attributeName="stroke-width" values="2;3.2;2" dur="2.2s" repeatCount="indefinite" />
+          </circle>
 
-          <!-- Avatar Illustration (Clipped to Circle r=54 at 135, 225) -->
+          <!-- Avatar Illustration (Clipped to Circle r=50 at 135, 225) -->
           <g clip-path="url(#avatar-clip)">
             <!-- Dark Ambient Workstation Room Background -->
-            <rect x="75" y="165" width="120" height="120" fill="url(#avatar-bg)" />
+            <rect x="80" y="170" width="110" height="110" fill="url(#avatar-bg)" />
 
             <!-- Digital Matrix / Code Rain Streams in Background -->
-            <text x="84" y="186" font-size="6.5" fill="#10b981" opacity="0.3" font-family="monospace">010110</text>
-            <text x="84" y="196" font-size="6.5" fill="#10b981" opacity="0.25" font-family="monospace">SYS_OK</text>
-            <text x="84" y="206" font-size="6.5" fill="#10b981" opacity="0.2" font-family="monospace">KERNEL</text>
-            <text x="164" y="186" font-size="6.5" fill="#38bdf8" opacity="0.3" font-family="monospace">110010</text>
-            <text x="164" y="196" font-size="6.5" fill="#38bdf8" opacity="0.25" font-family="monospace">DEVBOX</text>
-            <text x="164" y="206" font-size="6.5" fill="#38bdf8" opacity="0.2" font-family="monospace">NET_UP</text>
+            <text x="88" y="190" font-size="6.5" fill="#10b981" opacity="0.3" font-family="monospace">010110</text>
+            <text x="88" y="200" font-size="6.5" fill="#10b981" opacity="0.25" font-family="monospace">SYS_OK</text>
+            <text x="88" y="210" font-size="6.5" fill="#10b981" opacity="0.2" font-family="monospace">KERNEL</text>
+            <text x="160" y="190" font-size="6.5" fill="#38bdf8" opacity="0.3" font-family="monospace">110010</text>
+            <text x="160" y="200" font-size="6.5" fill="#38bdf8" opacity="0.25" font-family="monospace">DEVBOX</text>
+            <text x="160" y="210" font-size="6.5" fill="#38bdf8" opacity="0.2" font-family="monospace">NET_UP</text>
 
             <!-- Workstation Screen Reflection Gradient (Light illuminating from below) -->
-            <rect x="75" y="210" width="120" height="80" fill="url(#term-ambient-glow)" opacity="0.55" />
+            <rect x="80" y="215" width="110" height="70" fill="url(#term-ambient-glow)" opacity="0.55" />
 
             <!-- Torso: Dark Hoodie with Gentle Breathing Animation -->
             <g class="avatar-shoulders">
               <!-- Dark Hoodie Body -->
-              <path d="M 88 280 Q 94 250 116 244 Q 135 247 154 244 Q 176 250 182 280 Z" fill="#0f172a" />
+              <path d="M 92 278 Q 98 252 118 245 Q 135 248 152 245 Q 172 252 178 278 Z" fill="#0f172a" />
               <!-- Hoodie Seams and Shadows -->
-              <path d="M 116 244 Q 135 258 154 244 L 148 280 L 122 280 Z" fill="#0b111e" />
+              <path d="M 118 245 Q 135 258 152 245 L 147 278 L 123 278 Z" fill="#0b111e" />
               <!-- Inner T-shirt Collar -->
-              <path d="M 124 246 Q 135 252 146 246 L 143 258 Q 135 262 127 258 Z" fill="#05080f" />
+              <path d="M 125 247 Q 135 253 145 247 L 142 258 Q 135 262 128 258 Z" fill="#05080f" />
               <!-- Hoodie Drawstrings -->
-              <line x1="126" y1="250" x2="124" y2="272" stroke="#334155" stroke-width="1.5" />
-              <line x1="144" y1="250" x2="146" y2="272" stroke="#334155" stroke-width="1.5" />
+              <line x1="127" y1="250" x2="125" y2="270" stroke="#334155" stroke-width="1.4" />
+              <line x1="143" y1="250" x2="145" y2="270" stroke="#334155" stroke-width="1.4" />
             </g>
 
-            <!-- Resting Headphones around Neck -->
-            <!-- Padded Headphone Band -->
-            <path d="M 104 246 Q 135 266 166 246" fill="none" stroke="#1e293b" stroke-width="6.5" stroke-linecap="round" />
-            <path d="M 104 246 Q 135 266 166 246" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-linecap="round" opacity="0.7" />
-            <!-- Left Earcup resting on shoulder -->
-            <rect x="98" y="238" width="12" height="18" rx="4" fill="#090d16" stroke="#334155" stroke-width="1" />
-            <circle cx="104" cy="247" r="2" fill="#10b981" />
-            <!-- Right Earcup resting on shoulder -->
-            <rect x="160" y="238" width="12" height="18" rx="4" fill="#090d16" stroke="#334155" stroke-width="1" />
-            <circle cx="166" cy="247" r="2" fill="#10b981" />
+            <!-- Over-Ear Monitoring Headphones -->
+            <!-- Padded Cushioned Headband arched over head -->
+            <path d="M 109 214 Q 107 182 135 180 Q 163 182 161 214" fill="none" stroke="#1e293b" stroke-width="5.5" stroke-linecap="round" />
+            <path d="M 109 214 Q 107 182 135 180 Q 163 182 161 214" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-linecap="round" opacity="0.75" />
+            
+            <!-- Left Over-Ear Monitor Earcup -->
+            <rect x="104" y="206" width="11" height="22" rx="4.5" fill="#0b121e" stroke="#38bdf8" stroke-width="1.2" />
+            <circle cx="109.5" cy="217" r="2.2" fill="#10b981" />
+            
+            <!-- Right Over-Ear Monitor Earcup -->
+            <rect x="155" y="206" width="11" height="22" rx="4.5" fill="#0b121e" stroke="#38bdf8" stroke-width="1.2" />
+            <circle cx="160.5" cy="217" r="2.2" fill="#10b981" />
 
             <!-- Neck -->
-            <polygon points="125,230 145,230 142,248 128,248" fill="#c08552" />
-            <polygon points="127,235 143,235 141,244 129,244" fill="#a46d3e" opacity="0.6" />
+            <polygon points="126,232 144,232 141,248 129,248" fill="#c08552" />
+            <polygon points="128,236 142,236 140,244 130,244" fill="#a46d3e" opacity="0.6" />
 
-            <!-- Head and Face (Stylish young developer) -->
-            <!-- Head Base / Jaw -->
-            <path d="M 116 208 Q 116 234 135 237 Q 154 234 154 208 Q 154 186 135 186 Q 116 186 116 208 Z" fill="#d89f6d" />
-            <!-- Ear Left and Right -->
-            <ellipse cx="115" cy="214" rx="3.5" ry="5.5" fill="#c08552" />
-            <ellipse cx="155" cy="214" rx="3.5" ry="5.5" fill="#c08552" />
-            
-            <!-- Focused Smile / Mouth -->
-            <path d="M 131 228 Q 135 231 139 228" fill="none" stroke="#875329" stroke-width="1.3" stroke-linecap="round" />
+            <!-- Head Base and Jaw -->
+            <path d="M 118 210 Q 118 234 135 237 Q 152 234 152 210 Q 152 188 135 188 Q 118 188 118 210 Z" fill="#d89f6d" />
+
+            <!-- Focused Mouth -->
+            <path d="M 131 229 Q 135 231.5 139 229" fill="none" stroke="#875329" stroke-width="1.3" stroke-linecap="round" />
             <!-- Nose -->
-            <path d="M 135 218 L 133 222 L 137 222" fill="none" stroke="#a46d3e" stroke-width="1" stroke-linejoin="round" />
+            <path d="M 135 220 L 133 223 L 137 223" fill="none" stroke="#a46d3e" stroke-width="1" stroke-linejoin="round" />
 
             <!-- Eyes Group with Natural Blinking Animation -->
             <g class="avatar-eyes-group">
               <!-- Left Eye -->
-              <ellipse cx="126" cy="215" rx="3.5" ry="2.2" fill="#ffffff" />
-              <circle cx="126.5" cy="215" r="1.6" fill="#111827" />
-              <circle cx="127" cy="214.3" r="0.6" fill="#10b981" />
+              <ellipse cx="127" cy="216" rx="3.2" ry="2" fill="#ffffff" />
+              <circle cx="127.5" cy="216" r="1.5" fill="#111827" />
+              <circle cx="128" cy="215.3" r="0.6" fill="#10b981" />
               <!-- Right Eye -->
-              <ellipse cx="144" cy="215" rx="3.5" ry="2.2" fill="#ffffff" />
-              <circle cx="143.5" cy="215" r="1.6" fill="#111827" />
-              <circle cx="144" cy="214.3" r="0.6" fill="#10b981" />
-              <!-- Eyebrows (focused, sharp) -->
-              <path d="M 122 211 Q 126 210 130 212" fill="none" stroke="#090d16" stroke-width="1.4" stroke-linecap="round" />
-              <path d="M 148 211 Q 144 210 140 212" fill="none" stroke="#090d16" stroke-width="1.4" stroke-linecap="round" />
+              <ellipse cx="143" cy="216" rx="3.2" ry="2" fill="#ffffff" />
+              <circle cx="142.5" cy="216" r="1.5" fill="#111827" />
+              <circle cx="143" cy="215.3" r="0.6" fill="#10b981" />
+              <!-- Eyebrows -->
+              <path d="M 123 212 Q 127 211 131 213" fill="none" stroke="#090d16" stroke-width="1.4" stroke-linecap="round" />
+              <path d="M 147 212 Q 143 211 139 213" fill="none" stroke="#090d16" stroke-width="1.4" stroke-linecap="round" />
             </g>
 
-            <!-- Tech Glasses with glowing terminal reflections -->
-            <!-- Glasses Frame Rims -->
-            <rect x="120" y="210" width="12" height="9" rx="2" fill="none" stroke="#475569" stroke-width="1.3" />
-            <rect x="138" y="210" width="12" height="9" rx="2" fill="none" stroke="#475569" stroke-width="1.3" />
-            <!-- Glasses Bridge and Temples -->
-            <line x1="132" y1="214" x2="138" y2="214" stroke="#475569" stroke-width="1.4" />
-            <line x1="116" y1="213" x2="120" y2="213" stroke="#475569" stroke-width="1.3" />
-            <line x1="150" y1="213" x2="154" y2="213" stroke="#475569" stroke-width="1.3" />
+            <!-- Cyber Glasses with real-time glowing CRT lens reflections -->
+            <!-- Cyber Frames -->
+            <rect x="121" y="211" width="12" height="9.5" rx="2" fill="none" stroke="#38bdf8" stroke-width="1.3" opacity="0.9" />
+            <rect x="137" y="211" width="12" height="9.5" rx="2" fill="none" stroke="#38bdf8" stroke-width="1.3" opacity="0.9" />
+            <!-- Cyber Bridge and Temples extending to headphones -->
+            <line x1="133" y1="215" x2="137" y2="215" stroke="#38bdf8" stroke-width="1.4" />
+            <line x1="114" y1="214" x2="121" y2="214" stroke="#38bdf8" stroke-width="1.2" />
+            <line x1="149" y1="214" x2="156" y2="214" stroke="#38bdf8" stroke-width="1.2" />
 
-            <!-- Glasses Matrix/Code Glint on Lenses -->
+            <!-- Real-Time Glowing CRT Lens Reflections -->
             <g class="lens-glint">
-              <line x1="121" y1="218" x2="130" y2="211" stroke="#34d399" stroke-width="1.4" opacity="0.85" />
-              <line x1="139" y1="218" x2="148" y2="211" stroke="#34d399" stroke-width="1.4" opacity="0.85" />
+              <line x1="122" y1="219" x2="131" y2="212" stroke="#10b981" stroke-width="1.6" opacity="0.9" filter="url(#phosphor-glow)" />
+              <line x1="138" y1="219" x2="147" y2="212" stroke="#10b981" stroke-width="1.6" opacity="0.9" filter="url(#phosphor-glow)" />
             </g>
 
-            <!-- Messy Dark Hair (Layered Anime/Cyberpunk Strands) -->
+            <!-- Tousled Dark Hair (Layered Anime/Cyberpunk Strands) -->
             <!-- Hair Base Back -->
-            <path d="M 115 204 Q 112 188 126 182 Q 138 180 146 182 Q 158 188 155 204 Z" fill="#0b0f19" />
-            <!-- Messy Front Bangs and Tufts framing face -->
-            <path d="M 114 196 Q 120 188 126 195 Q 132 184 139 194 Q 146 186 153 194 Q 157 202 153 208 Q 149 198 144 204 Q 139 196 134 206 Q 130 196 124 204 Q 118 198 114 206 Z" fill="#131d2e" />
-            <path d="M 118 192 Q 126 182 135 188 Q 142 180 150 190 Q 146 198 141 192 Q 133 198 126 192 Z" fill="#1b283d" />
+            <path d="M 117 205 Q 113 189 127 183 Q 138 181 145 183 Q 157 189 153 205 Z" fill="#0b0f19" />
+            <!-- Tousled Front Bangs and Loose Locks -->
+            <path d="M 115 198 Q 121 190 127 197 Q 133 186 139 196 Q 146 188 152 196 Q 155 204 151 210 Q 148 200 143 206 Q 138 198 133 208 Q 129 198 123 206 Q 118 200 115 208 Z" fill="#131d2e" />
+            <path d="M 119 194 Q 127 184 135 190 Q 142 182 149 192 Q 145 200 140 194 Q 132 200 125 194 Z" fill="#1b283d" />
             <!-- Stray messy hair spikes -->
-            <path d="M 120 184 L 115 178 L 123 182 Z" fill="#131d2e" />
-            <path d="M 132 180 L 133 174 L 137 180 Z" fill="#1b283d" />
-            <path d="M 145 182 L 152 176 L 148 184 Z" fill="#131d2e" />
-            <path d="M 154 188 L 160 186 L 155 193 Z" fill="#131d2e" />
+            <path d="M 121 186 L 116 180 L 124 184 Z" fill="#131d2e" />
+            <path d="M 132 182 L 134 176 L 138 182 Z" fill="#1b283d" />
+            <path d="M 144 184 L 151 178 L 147 186 Z" fill="#131d2e" />
+            <path d="M 153 190 L 159 188 L 154 195 Z" fill="#131d2e" />
             
-            <!-- Emerald neon highlight reflection on hair fringe -->
-            <path d="M 121 196 Q 126 190 131 197" fill="none" stroke="#10b981" stroke-width="1.2" opacity="0.65" />
-            <path d="M 137 195 Q 142 189 148 196" fill="none" stroke="#10b981" stroke-width="1.2" opacity="0.65" />
+            <!-- Emerald neon highlight reflection on tousled hair fringe -->
+            <path d="M 122 198 Q 127 192 132 199" fill="none" stroke="#10b981" stroke-width="1.2" opacity="0.75" />
+            <path d="M 137 197 Q 142 191 147 198" fill="none" stroke="#10b981" stroke-width="1.2" opacity="0.75" />
+
+            <!-- Animated Vertical Scanning Laser Beam Sweep across Face -->
+            <g>
+              <line x1="80" y1="175" x2="190" y2="175" stroke="#10b981" stroke-width="1.8" filter="url(#phosphor-glow)">
+                <animate attributeName="y1" values="175;275;175" dur="2.6s" repeatCount="indefinite" />
+                <animate attributeName="y2" values="175;275;175" dur="2.6s" repeatCount="indefinite" />
+                <animate attributeName="stroke-opacity" values="0.65;1;0.65" dur="2.6s" repeatCount="indefinite" />
+              </line>
+              <rect x="80" y="165" width="110" height="12" fill="url(#laser-beam-gradient)" opacity="0.32">
+                <animate attributeName="y" values="165;265;165" dur="2.6s" repeatCount="indefinite" />
+              </rect>
+            </g>
 
             <!-- Scanline flicker over avatar -->
-            <rect x="75" y="165" width="120" height="120" fill="url(#scanlines)" opacity="0.5" pointer-events="none" />
+            <rect x="80" y="170" width="110" height="110" fill="url(#scanlines)" opacity="0.45" pointer-events="none" />
           </g>
 
           <!-- Live Telemetry Status Tag directly below Avatar -->
-          <g transform="translate(86, 292)">
+          <g transform="translate(86, 288)">
             <rect x="0" y="0" width="98" height="20" rx="4" fill="#0b171f" stroke="#10b981" stroke-width="1" />
             <circle cx="12" cy="10" r="3" class="blinking-cursor" />
             <text x="22" y="14" font-size="9.5" fill="#10b981" font-weight="700" letter-spacing="0.5">DEV // ONLINE</text>
           </g>
 
           <!-- System ID sub-tags -->
-          <text x="135" y="328" text-anchor="middle" font-size="9" fill="#38bdf8" letter-spacing="1">[ID: #898-DROID]</text>
-          <text x="135" y="342" text-anchor="middle" font-size="8.5" fill="#64748b" letter-spacing="0.8">SYSTEM: ONLINE (60Hz)</text>
+          <text x="135" y="324" text-anchor="middle" font-size="9" fill="#38bdf8" letter-spacing="1">[ID: #898-DROID]</text>
+          <text x="135" y="338" text-anchor="middle" font-size="8.5" fill="#64748b" letter-spacing="0.8">SYSTEM: ONLINE (60Hz)</text>
         </g>
 
         <!-- Vertical Neofetch Divider -->

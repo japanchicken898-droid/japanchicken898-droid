@@ -1,14 +1,22 @@
 <div align="center">
 
-  <!-- Retro CRT Animated Terminal Window -->
+  <!-- Retro CRT Animated Terminal Window with GitHub Theme Support -->
   <a href="https://github.com/japanchicken898-droid">
-    <img src="assets/terminal.svg" width="850" alt="Hacker Terminal - Deepak Bathirachalam" />
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/terminal.svg">
+      <source media="(prefers-color-scheme: light)" srcset="assets/terminal.svg">
+      <img src="assets/terminal.svg" width="850" alt="Hacker Terminal - Deepak Bathirachalam" />
+    </picture>
   </a>
 
   <br />
 
-  <!-- Dynamic Typing Subtitle SVG -->
-  <img src="assets/subtitle.svg" width="850" alt="Terminal Subtitle Telemetry" />
+  <!-- Dynamic Typing Subtitle SVG with GitHub Theme Support -->
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/subtitle.svg">
+    <source media="(prefers-color-scheme: light)" srcset="assets/subtitle.svg">
+    <img src="assets/subtitle.svg" width="850" alt="Terminal Subtitle Telemetry" />
+  </picture>
 
   <br />
 
@@ -42,19 +50,19 @@
 ### `/// FEATURED_SYSTEMS`
 
 ```ansi
-[ 01 ] 👁️ OCULAR — Visual Automation & Meta SAM Compiler
+[ 01 ]  OCULAR — Visual Automation & Meta SAM Compiler
        ├─ Translates raw video input into Playwright automation scripts & FastAPI microservices via Meta SAM.
        └─ Stack: Meta SAM (Segment Anything) • Playwright • FastAPI • Python • Computer Vision Pipelines
 
-[ 02 ] 🎯 CAREERLENS — Employability Proof-of-Work Telemetry Engine
+[ 02 ]  CAREERLENS — Employability Proof-of-Work Telemetry Engine
        ├─ Employability audit engine cross-verifying resume claims against GitHub & LeetCode proof-of-work telemetry (Data Quest 3.0).
        └─ Stack: Telemetry Engine • GitHub REST/GraphQL API • LeetCode Graph • Next.js • Python
 
-[ 03 ] ⚡ SIM RESUS Z — Real-Time Clinical Resuscitation Decision Engine
+[ 03 ]  BayLog — Real-Time Clinical Resuscitation Decision Engine
        ├─ Low-latency voice-driven Code Blue clinical resuscitation decision engine deployed on cloud infrastructure.
        └─ Stack: Voice AI • Low-Latency Audio Streaming • Clinical Decision Trees • Cloud Infrastructure
 
-[ 04 ] 🌊 AQUATRACK — IoT Water Safety Telemetry Stream
+[ 04 ] AQUATRACK — IoT Water Safety Telemetry Stream
        ├─ IoT water safety telemetry system built with ESP32 and analog sensor arrays streaming real-time to Flutter.
        └─ Stack: ESP32 Microcontrollers • C++ • Analog Sensor Arrays • Real-Time WebSockets • Flutter
 ```
@@ -64,17 +72,20 @@
 ### `// COMPETITIVE_PROGRAMMING & HACKATHONS`
 
 ```ansi
-🏆 1st PLACE WINNER — API Heist @ TechnoVIT (VIT Chennai)
-   ├─ Outperformed 50+ collegiate engineering teams in an intense 24-hour innovation hackathon.
+ 1st PLACE WINNER — API Heist @ TechnoVIT (VIT Chennai)
+   ├─ Won in an intense 24-hour innovation hackathon.
    └─ Architected a high-throughput API gateway and fault-tolerant microservice cluster under strict latency SLA.
 
-🎯 NATIONAL HACKATHON FINALIST — Data Quest 3.0
+ NATIONAL HACKATHON FINALIST — Data Quest 3.0
    ├─ Qualified in the top percentile of national engineering hackathons.
    └─ Built resilient distributed data pipelines and defended architectural decisions before industry juries.
 
-⚡ ALGORITHMIC PROBLEM SOLVER
-   ├─ 500+ problems solved across competitive coding platforms (LeetCode, Codeforces).
-   └─ Core focus: Advanced Graph Algorithms (Traversals, Shortest Paths, Network Flow), Dynamic Programming, and Asymptotic Complexity Optimization.
+ Meta Developers Hackathon
+    └─ Selected among the top contenders in the world, limited seats for participation.
+    └─ Currently working on it.
+
+ Hackerrank Orchestrate
+    └─Results yet to arrive.
 ```
 
 ---
@@ -108,3 +119,4 @@
 <div align="center">
   <sub>Engineered with precision. Powered by phosphor CRT terminals, live telemetry &amp; continuous iteration.</sub>
 </div>
+
